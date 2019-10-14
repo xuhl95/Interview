@@ -508,7 +508,7 @@ Trait使用详解  [《Trait使用详解》](https://www.php.net/manual/zh/langu
 
 一个生成器函数看起来像一个普通的函数，不同的是普通函数返回一个值，而一个生成器可以yield生成许多它所需要的值
 
-拓展阅读 [《yield 核心原理》](./03.yield.md)
+拓展阅读 [《yield 核心原理》](./04.yield.md)
 
 ### traits 与 interfaces 区别 及 traits 解决了什么痛点
 
