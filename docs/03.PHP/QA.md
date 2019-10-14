@@ -40,7 +40,7 @@ require 和 include 几乎完全一样，除了处理失败的方式不同之外
 
 include_once 语句在脚本执行期间包含并运行指定文件。此行为和 include 语句类似，唯一区别是如果该文件中已经被包含过，则不会再次包含。如同此语句名字暗示的那样，只会包含一次
 
-### 常见数组函数
+### 数组处理函数
 
 array_count_values — 统计数组中所有的值
 
@@ -65,6 +65,8 @@ array_values — 返回数组中所有的值
 count — 计算数组中的单元数目，或对象中的属性个数
 
 sort — 对数组排序
+
+更多数组函数 [《更多数组函数》](https://www.php.net/manual/zh/book.array.php)
 
 ### Cookie 和 Session
 

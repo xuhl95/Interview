@@ -84,7 +84,7 @@
 - [MVC 的理解](./docs/03.PHP/QA.md#mvc-的理解)
 - [主流 PHP 框架特点](./docs/03.PHP/QA.md#主流-php-框架特点)
 - [对象关系映射/ORM](./docs/03.PHP/QA.md#对象关系映射orm)
-
+- [了解大部分数组处理函数](./docs/03.PHP/QA.md#数组处理函数)
 ### Web 篇
 
 - [SEO 有哪些需要注意的](./docs/04.Web/QA.md#seo-有哪些需要注意的)
