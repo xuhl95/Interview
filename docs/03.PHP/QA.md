@@ -1,5 +1,7 @@
 # 问题与简答
 
+<!-- MarkdownTOC autolink="true" autoanchor="true" -->
+
 ## PHP 篇
 
 ### echo、print、print_r、var_dump 区别
@@ -541,3 +543,5 @@ PHP 数组实现由 hashtable 变为 zend array
 ### BOM 头是什么，怎么除去
 
 ### 模板引擎是什么，解决什么问题、实现原理（Smarty、Twig、Blade）
+
+<!-- /MarkdownTOC -->
