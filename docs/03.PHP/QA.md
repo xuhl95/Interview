@@ -1,7 +1,5 @@
 # 问题与简答
 
-<!-- MarkdownTOC autolink="true" autoanchor="true" -->
-
 ## PHP 篇
 
 ### echo、print、print_r、var_dump 区别
@@ -494,23 +492,17 @@ $ phpize $ ./configure $ make && make install
 
 引用计数器
 
-### Trait
-
-自 PHP 5.4.0 起，PHP 实现了一种代码复用的方法，称为 trait。
-Trait 是为类似 PHP 的单继承语言而准备的一种代码复用机制。Trait 为了减少单继承语言的限制，使开发人员能够自由地在不同层次结构内独立的类中复用 method。Trait 和 Class 组合的语义定义了一种减少复杂性的方式，避免传统多继承和 Mixin 类相关典型问题。
-
-Trait 和 Class 相似，但仅仅旨在用细粒度和一致的方式来组合功能。 无法通过 trait 自身来实例化。它为传统继承增加了水平特性的组合；也就是说，应用的几个 Class 之间不需要继承。
-
-
-Trait使用详解  [《Trait使用详解》](https://www.php.net/manual/zh/language.oop5.traits.php)
-
 ### yield 是什么，说个使用场景 yield、yield 核心原理是什么
 
 一个生成器函数看起来像一个普通的函数，不同的是普通函数返回一个值，而一个生成器可以yield生成许多它所需要的值
 
 拓展阅读 [《yield 核心原理》](./04.yield.md)
 
+### 抽象类和接口的区别，使用场景
+拓展阅读 [《抽象类和接口的区别，使用场景》](./05.抽象类和接口的区别，使用场景.md)
+
 ### traits 与 interfaces 区别 及 traits 解决了什么痛点
+拓展阅读 [《traits 与 interfaces》](06.traits与interfaces的区别及traits解决了什么痛点.md)
 
 ### 如何 foreach 迭代对象、如何数组化操作对象 $obj[key]、如何函数化对象 $obj(123);
 
@@ -551,5 +543,3 @@ PHP 数组实现由 hashtable 变为 zend array
 ### BOM 头是什么，怎么除去
 
 ### 模板引擎是什么，解决什么问题、实现原理（Smarty、Twig、Blade）
-
-<!-- /MarkdownTOC -->
