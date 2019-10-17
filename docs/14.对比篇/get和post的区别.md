@@ -1,4 +1,7 @@
+
 原文地址[《HTTP 方法：GET 对比 POST》](https://www.w3school.com.cn/tags/html_ref_httpmethods.asp)
+
+- [对比汇总](./docs/14.对比篇/QA.md)
 ## get和post的区别
 
 ### get方法

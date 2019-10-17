@@ -232,7 +232,7 @@
 
 ### 对比篇
 
-- [汇总](./docs/14.对比篇/QA.md)
+- [对比汇总](./docs/14.对比篇/QA.md)
 - [Apache和Nginx的区别](./docs/14.对比篇/Apache和Nginx的区别.md)
 - [get和post的区别](./docs/14.对比篇/get和post的区别.md)
 - [redis和memcache区别](./docs/14.对比篇/redis和memcache区别.md)
