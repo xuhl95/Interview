@@ -230,6 +230,14 @@
 - 服务降级
 - 语言对比
 
+### 对比篇
+
+- [汇总](./docs/14.对比篇/QA.md)
+- [Apache和Nginx的区别](./docs/14.对比篇/Apache和Nginx的区别.md)
+- [get和post的区别](./docs/14.对比篇/get和post的区别.md)
+- [redis和memcache区别](./docs/14.对比篇/redis和memcache区别.md)
+- [http和https区别](./docs/14.对比篇/QA.md#HTTP与HTTPS区别)
+
 ## 为何要写这个
 
 从事软件开发，已经接近五个年头了，去年面试中，发现自己依然处于尴尬的位置。简单重复，缺乏挑战的工作，已经没有多大吸引力了，优秀的平台，面试缺屡次碰壁。人上年纪之后，思维敏感度、记忆力都明显有所下滑。
