@@ -54,6 +54,9 @@
 - [补充](./docs/02.数据结构与算法.md#8-补充)
 - [经典算法题](./docs/02.数据结构与算法.md#9-经典算法题)
 
+### 算法
+- 冒泡排序
+
 ### PHP 篇
 
 - [echo、print、print_r、var_dump 区别](./docs/03.PHP/QA.md#echoprintprint_rvar_dump-区别)

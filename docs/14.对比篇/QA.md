@@ -22,3 +22,5 @@ HTTPS和HTTP的区别主要如下：
 
 ### redis和memcache区别
 详情[《选redis还是memcache》](./redis和memcache区别.md)
+
+### const和define区别
