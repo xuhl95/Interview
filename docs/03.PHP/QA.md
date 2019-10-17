@@ -521,6 +521,7 @@ $ phpize $ ./configure $ make && make install
 ### HashTable
 
 ### PHP7 新特性
+扩展阅读[《php7 新特性》](./07.php7&新特性.md)
 
 标量类型声明、返回值类型声明、通过 define() 定义常量数组、匿名类、相同命名空间类一次性导入
 
