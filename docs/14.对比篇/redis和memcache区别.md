@@ -1,6 +1,6 @@
 原文地址[《选redis还是memcache》](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961272&idx=1&sn=79ad515b013b0ffc33324db86ba0f834&chksm=bd2d02648a5a8b728db094312f55574ec521b30e3de8aacf1d2d948a3ac24dbf30e835089fa7&scene=21#wechat_redirect)
 
-- [对比汇总](./docs/14.对比篇/QA.md)
+- [对比汇总](./QA.md)
 ## 选redis还是memcache
 
 memcache和redis是互联网分层架构中，最常用的KV缓存。不少同学在选型的时候会纠结，到底是选择memcache还是redis。
