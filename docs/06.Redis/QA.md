@@ -201,6 +201,50 @@ Redis 是基于内存的操作，CPU 不是 Redis 的瓶颈，Redis 瓶颈最有
 
 5、使用底层模型不同，它们之间底层实现方式以及与客户端之间通信的应用协议不一样，Redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求
 
+### Redis单核CPU占用过高
+
+#### 出现cpu过高的原因有：
+
+1、连接数过多，通过redis-cli info | grep connected_clients查看
+
+2、慢查询，因为redis是单线程，如果有慢查询的话，会阻塞住之后的操作，通过redis日志查 
+
+3、value值过大？比如value几十兆，当然这种情况比较少，其实也可以看做是慢查询的一种
+
+4、aof重写/rdb fork发生？瞬间会堵一下Redis服务器
+
+#### 对应解决方案：
+1、连接数过多解决：
+
+1.1 关闭僵尸连接
+采用redi-cli登录,采用client kill ip:port(redis远程连接的ip和端口)。 
+需要采用脚本批量删除多个连接
+
+1.2 修改redis timeout参数
+采用redis-cli登录，采用config set timeout xx 设置redis的keepalive时间
+
+1.3 修改redis进程的文件数限制
+echo -n "Max open files  3000:3000" >  /proc/PID/limits
+
+1.4 修改系统参数的最大文件数限制
+/etc/security/limits.conf
+
+2、对慢查询进行持久化，比如定时存放到mysql之类。（redis的慢查询只是一个list，超过list设置的最大值，会清除掉之前的数据，也就是看不到历史）
+
+3、限制key的长度和value的大小
+
+#### 使用redis的注意事项:
+1、Master最好不要做任何持久化工作，包括内存快照和AOF日志文件，特别是不要启用内存快照做持久化。
+
+2、如果数据比较关键，某个Slave开启AOF备份数据，策略为每秒同步一次。
+
+3、为了主从复制的速度和连接的稳定性，Slave和Master最好在同一个局域网内。
+
+4、尽量避免在压力较大的主库上增加从库
+
+5、为了Master的稳定性，主从复制不要用图状结构，用单向链表结构更稳定，即主从关系为：Master<--Slave1<--Slave2<--Slave3.......， 这样的结构也方便解决单点故障问题，实现Slave对Master的替换，也即，如果Master挂了，可以立马启用Slave1做Master，其他不变
+
+6、使用Redis负载监控工具：redis-monitor，它是一个Web可视化的 redis 监控程序
 
 ### 集合命令的实现方法
 
