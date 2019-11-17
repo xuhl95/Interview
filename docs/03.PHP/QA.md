@@ -3,7 +3,7 @@
 ## PHP 篇
 
 ### COOKIE和SESSION的使用以及区别
-原文地址[《COOKIE和SESSION的使用以及区别》](https://blog.csdn.net/createNo_1/article/details/80555972)
+原文地址[《COOKIE和SESSION的使用以及区别》](https://www.imooc.com/article/14919)
 
 ### echo、print、print_r、var_dump 区别
 
