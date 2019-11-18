@@ -24,3 +24,6 @@ HTTPS和HTTP的区别主要如下：
 详情[《选redis还是memcache》](./redis和memcache区别.md)
 
 ### const和define区别
+
+### COOKIE和SESSION的使用以及区别
+使用和区别[《COOKIE和SESSION的使用以及区别》](https://www.imooc.com/article/14919)
