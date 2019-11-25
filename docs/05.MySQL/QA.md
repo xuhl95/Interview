@@ -2,6 +2,9 @@
 
 ## MySQL 篇
 
+### Mysql教程
+扩展阅读[《mysql教程》](https://www.w3cschool.cn/mysql/)
+
 ### 体系结构
 
 组成部分：SQL 接口，解析器，优化器，缓存，存储引擎
@@ -43,9 +46,9 @@ INSERT、SELECT、UPDATE、DELETE
 
 ### 数据库设计范式
 
-- 第一范式：属性具有原子性，不可再分解，即不能表中有表
-- 第二范式：唯一性约束，每条记录有唯一标示，所有的非主键字段均需依赖于主键字段
-- 第三范式：冗余性约束，非主键字段间不能相互依赖
+- 第一范式(1NF)：要求数据库表的每一列都是不可分割的基本数据项，同一列中不能有多个值
+- 第二范式(2NF)：唯一性约束，每条记录有唯一标示，所有的非主键字段均需依赖于主键字段
+- 第三范式(3NF)：冗余性约束，非主键字段间不能相互依赖
 
 ### 数据库设计原则
 
@@ -66,12 +69,16 @@ INSERT、SELECT、UPDATE、DELETE
 
 拓展阅读 [《MySQL 连接的使用》](./01.MySQL连接的使用.md)
 
+W3c-Mysql连接的使用[《MySQL 连接的使用》](https://www.w3cschool.cn/mysql/56ik1sqv.html)
+
 ### UNION、UNION ALL
 
 - UNION 操作符用于连接两个以上的 SELECT 语句的结果组合到一个结果集合中。多个 SELECT 语句会删除重复的数据
 - UNION ALL 操作符重复数据全部显示，不去重
 
 ### 常用 MySQL 函数
+
+扩展阅读 [《MySQL 函数》](https://blog.csdn.net/sinat_38899493/article/details/78710482)
 
 #### 数学函数
 
@@ -113,6 +120,11 @@ SELECT FROM_UNIXTIME(1557240900); #2019-05-07 22:55:00
 ```mysql
 SELECT FORMAT(2.7895, 2); #2.79
 ```
+
+### MySQL索引原理和实现
+
+#### 索引原理和实现
+扩展阅读 [《MySQL索引原理和实现》](./04.Mysql索引原理和实现.md)
 
 ### 锁
 
