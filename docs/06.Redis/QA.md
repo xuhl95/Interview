@@ -2,27 +2,41 @@
 
 ## Redis 篇
 
-### Redis 介绍
+扩展阅读[《官方文档》](https://redis.io/documentation)
 
-Redis 是一个高性能的 key-value 数据库。每秒可执行操作高达 10万+ QPS
+### Redis详解
 
-### Redis 特点
+扩展阅读[《Redis详解》](https://www.cnblogs.com/ysocean/category/1221478.html)
 
-- 支持数据持久化，可将内存中的数据保存在磁盘，重启时再次加载
-- 支持 KV 类型数据，也支持其他丰富的数据结构存储
-- 支持数据备份，即 master-slave 模式的数据备份
+#### 1、redis的简介与安装
 
-### Redis 支持哪些数据结构
+扩展阅读 [《redis的简介与安装》](https://www.cnblogs.com/ysocean/p/9074353.html)
 
-- STRING：字符串、整数或浮点数
+#### 2、redis的配置文件介绍
+扩展阅读 [《redis的配置文件介绍》](https://www.cnblogs.com/ysocean/p/9074787.html)
 
-- LIST：列表，可存储多个相同的字符串
+#### 3、redis的五大数据类型详细用法
+扩展阅读 [《redis的五大数据类型详细用法》](https://www.cnblogs.com/ysocean/p/9080940.html)
 
-- SET：集合，存储不同元素，无序排列
+#### 4、redis的底层数据结构
 
-- HASH：散列表，存储键值对之间的映射，无序排列
+扩展阅读 [《redis的底层数据结构》](https://www.cnblogs.com/ysocean/p/9080942.html)
 
-- ZSET：有序集合，存储键值对，有序排列
+#### 5、redis的五大数据类型实现原理
+
+扩展阅读 [《redis的五大数据类型实现原理》](https://www.cnblogs.com/ysocean/p/9102811.html)
+
+#### 6、RDB 持久化
+
+扩展阅读 [《RDB 持久化》](https://www.cnblogs.com/ysocean/p/9114268.html)
+
+#### 7、AOF 持久化
+
+扩展阅读 [《AOF 持久化》](https://www.cnblogs.com/ysocean/p/9114267.html)
+
+#### 8、主从复制
+
+扩展阅读 [《主从复制》](https://www.cnblogs.com/ysocean/p/9143118.html)
 
 ### Redis基础、高级特性与性能调优
 原文地址[Redis基础、高级特性与性能调优](https://www.jianshu.com/p/2f14bc570563)
@@ -39,21 +53,21 @@ Redis 是一个高性能的 key-value 数据库。每秒可执行操作高达 10
 
 扩展阅读[《redis和memcache区别，源码怎么说》](../14.对比篇/redis和memcache区别.md)
 
+### 缓存穿透，缓存击穿，缓存雪崩解决方案分析
+
+扩展阅读[《缓存穿透，缓存击穿，缓存雪崩》](https://www.cnblogs.com/sbj-dawn/p/11116673.html)
+
 ### 发布订阅
 
-发布订阅(pub/sub)是一种消息通信模式：发送者(pub)发送消息，订阅者(sub)接收消息
+扩展阅读[《redis发布订阅》](http://doc.redisfans.com/topic/pubsub.html)
 
-### 持久化策略
+### 持久化策略 (RDB/AOF 持久化)
 
-#### 快照持久化
-
-将某一时刻的所有数据写入硬盘。使用`BGSAVE`命令，随着内存使用量的增加，执行 BGSAVE 可能会导致系统长时间地停顿
-
-#### AOF 持久化
-
-只追加文件，在执行写命令时，将被执行的写命令复制到硬盘里面。使用 AOF 策略需要对硬盘进行大量写入，Redis 处理速度会受到硬盘性能的限制
+扩展阅读[redis持久化](http://doc.redisfans.com/topic/persistence.html)
 
 ### Redis 事务
+
+扩展阅读[《redis事务》](http://doc.redisfans.com/topic/transaction.html)
 
 ```shell
 redis> MULTI  #标记事务开始
@@ -245,33 +259,3 @@ echo -n "Max open files  3000:3000" >  /proc/PID/limits
 5、为了Master的稳定性，主从复制不要用图状结构，用单向链表结构更稳定，即主从关系为：Master<--Slave1<--Slave2<--Slave3.......， 这样的结构也方便解决单点故障问题，实现Slave对Master的替换，也即，如果Master挂了，可以立马启用Slave1做Master，其他不变
 
 6、使用Redis负载监控工具：redis-monitor，它是一个Web可视化的 redis 监控程序
-
-### 集合命令的实现方法
-
-|命令|intset 编码的实现方法|hashtable 编码的实现方法|
-|-|-|-|
-|SADD|调用 intsetAdd 函数，将所有新元素添加到整数集合里面|调用 dictAdd，以新元素为键，NULL 为值，将键值对添加到字典里面|
-|SCARD|调用 intsetLen 函数，返回整数集合所包含的元素数量，这个数量就是集合对象所包含的元素数量|调用 dictSize 函数，返回字典所包含的键值对数量，这个数量就是集合对象所包含的元素数量|
-|SISMEMBER|调用 intsetFind 函数，在整数集合中查找给定的元素，如果找到了元素存在于集合，没找到则说明元素不存在集合|调用 dictFind 函数，在字典的键中查找给定的元素，如果找到了说明元素存在于集合，没找到则说明元素不存在于集合|
-|SMEMBERS|遍历整个整数集合，调用 inisetGet 函数返回集合元素|遍历整个字典，使用 dictGetKey 函数返回字典的键作为集合元素|
-|SRANDMEMBER|调用 intsetRandom 函数，从整数集合中随机返回一个元素|调用 dictGetRandomKey 函数，从字典中随机返回一个字典键|
-|SPOP|调用 intsetRandom 函数，从整数集合中随机取出一个元素，再将这个随机元素返回给客户端之后，调用 intsetRemove 函数，将随机元素从整数集合中删除掉|调用 dictGetRandomKey 函数，从字典中随机取出一个字典键，在将这个随机字典键的值返回给客户端之后，调用 dictDelete 函数，从字典中删除随机字典键所对应的键值对|
-|SREM|调用 intsetRemove 函数，从整数集合中删除所有给定的元素|调用 dictDelete 函数，从字典中删除所有键为给定元素的键值对|
-
-### 有序集合命令的实现方法
-
-|命令|ziplist 编码的实现方法|zset 编码的实现方法|
-|-|-|-|
-|ZADD|调用 ziplistInsert 函数，将成员和分值作为两个节点分别插入到压缩列表|先调用 zslInsert 函数，将新元素添加到跳跃表，然后调用 dictAdd 函数，将新元素关联到字典|
-|ZCARD|调用 ziplistLen 函数，获得压缩列表包含节点的数量，将这个数量除以2得出集合元素的数量|访问跳跃表数据结构的 length 属性，直接访问集合元素的数量|
-|ZCOUND|遍历压缩列表，统计分值在给定范围内的节点的数量|遍历跳跃表，统计分值在给定范围内的节点的数量|
-|ZRANGE|从表头向表尾遍历压缩列表，返回给定索引范围内的所有元素|从表头向表尾遍历跳跃表，返回给定索引范围内的所有元素|
-|ZREVRANGE|表尾向表头遍历压缩列表，返回给定索引范围内的所有元素|从表尾向表头遍历跳跃表，返回给定索引范围的所有元素|
-|ZRANK|从表头向表尾遍历压缩列表，查找给定的成员，沿途记录经过节点的数量，当找到给定成员之后，沿途节点的数量就是该成员所对应元素的排名|从表头向表尾遍历跳跃表，查找给定的成员，沿途记录经过节点的数量，当找到给定成员之后，沿途节点的数量就是该成员所对应元素的排名|
-|ZREVRANK|从表尾向表头遍历压缩列表，查找给定的成员，沿途记录经过节点的数量，当找到给定成员之后，沿途节点的数量就是该成员所对应元素的排名|从表尾向表头遍历跳跃表，查找给定的成员，沿途纪录经过节点的数量，当找到给定成员之后，沿途节点的数量就是该成员所对应元素的排名|
-|ZREM|遍历压缩列表，删除所有包含给定成员的节点，以及被删除成员节点旁边的分值节点|遍历跳跃表，删除所有包含了给定成员的跳跃表节点。并在字典中解除被删除元素的成员和分值关联|
-|ZSCORE|遍历压缩列表，查找包含了给定成员的节点，然后取出成员节点旁边的分值节点保存的元素分值|直接从字典中取出给定成员的分值|
-
-### redis.conf 配置
-
-### 慢查询
