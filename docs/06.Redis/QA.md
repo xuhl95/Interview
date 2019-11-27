@@ -38,6 +38,10 @@
 
 扩展阅读 [《主从复制》](https://www.cnblogs.com/ysocean/p/9143118.html)
 
+### redis 70题解析
+
+扩展阅读 [redis 70题解析](./Redis70题解析.pdf)
+
 ### Redis基础、高级特性与性能调优
 原文地址[Redis基础、高级特性与性能调优](https://www.jianshu.com/p/2f14bc570563)
 
