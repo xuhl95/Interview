@@ -128,57 +128,8 @@ SELECT FORMAT(2.7895, 2); #2.79
 
 ### 锁
 
-#### 用途
-
-多个查询需要在同一时刻修改数据，会产生并发控制的问题。使用锁可以有效解决这个问题
-
-#### 读写锁
-
-- 共享锁：同一时刻可以同时读取同一个资源
-- 排他锁：一个写锁会阻塞其他的写锁和读锁
-
-#### 锁粒度
-
-- 表锁：开销最小，对表进行写操作，需要获得写锁，会阻塞该表的所有读写操作
-- 行级锁：最大锁开销，可以最大程度地支持并发处理
-
-#### 乐观锁
-
-#### 悲观锁
-
 ### 事务
-
-事务就是一组原子性的 SQL 查询，或者说一个独立的工作单元。事务内的语句，要么全部执行成功，要么全部执行失败
-
-ACID 特性：原子性(atomicity)、一致性(consistency)、隔离性(isolation)、持久性(durability)
-
-#### 隔离级别
-
-- 未提交读(READ UNCOMMITTED)：事务中的修改，未提交，其他事务也是可见
-
-> `脏读`(Dirty Read)：事务读取未提交的数据
-
-- 提交读(READ COMMITTED)：事务未提交，对自己可见，两次同样查询，可能得到不同结果
-
-- 可重复读(REPEATABLE READ)：同一个事务多次读取结果一致。解决脏读问题
-
-> MySQL 默认事务隔离级别
-
-- 可串行化(SERIALIZABLE)：强制事务串行执行
-
-#### 死锁
-
-多个事务在同一资源上相互占用，并请求锁定对方占用资源，从而导致恶性循环的现象
-
-InnoDB 目前处理方法：将持有最少行级排他锁的事务进行回滚
-
-#### 事务日志
-
-事务日志可以帮助提高事务的效率
-
-#### MySQL 中的事务
-
-MySQL 默认采用自动提交(AUTOCOMMIT)模式，每个查询都当作一个事务执行提交操作
+扩展阅读 [《MySQL的四种事务隔离级别》](https://www.cnblogs.com/jkko123/p/10181870.html)
 
 ### 常见存储引擎
 
@@ -241,8 +192,7 @@ ALTER TABLE `table_name` ADD INDEX index_name (`column1`, `column2`, `column3`);
 
 ### 聚族索引与非聚族索引的区别
 
-- 按物理存储分类：聚簇索引(clustered index)、非聚簇索引(non-clustered index)
-- 聚簇索引的叶子节点就是数据节点，而非聚簇索引的叶子节点仍然是索引节点，只不过有指向对应数据块的指针
+
 
 ### BTree 与 BTree-/BTree+ 索引原理
 
@@ -268,20 +218,6 @@ MySQL 单表容量在`500万`左右，性能处于最佳状态，此时，MySQL 
 
 ### EXPLAIN 输出格式
 
-|Column|JSON Name|含义|
-|-|-|-|
-|id|select_id|SELECT 标识符|
-|select_type|None|SELECT 类型|
-|table|table_name|输出行描述的表的表名|
-|partitions|partitions|匹配的分区|
-|type|access_type|连接类型|
-|possible_keys|possible_keys|可供选择使用的索引|
-|key|key|实际使用的索引|
-|key_len|key_length|实际使用的索引的长度|
-|ref|ref|与索引进行比较的列，也就是关联表使用的列|
-|rows|rows|将要被检查的估算的行数|
-|filtered|filtered|被表条件过滤的行数的百分比|
-|Extra|None|附件信息|
 
 ### my.cnf 配置
 
