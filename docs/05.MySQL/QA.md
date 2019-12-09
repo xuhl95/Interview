@@ -22,28 +22,6 @@
 
 拓展阅读 [《MySQL体系结构》](./02.MySQL体系结构.md)
 
-### 基础操作
-
-#### 数据库管理
-
-连接数据库、查看所有库、选择库、创建库、删除库
-
-查看所有表、查看表结构、创建表、删除表
-
-添加字段、删除字段、修改字段
-
-#### CRUD
-
-INSERT、SELECT、UPDATE、DELETE
-
-#### 单表查询
-
-所有字段、指定字段、WHERE、IN、BETWEEN AND、LIKE、AND、OR、DISTINCT、ORDER BY、GROUP BY、LIMIT
-
-#### 多表查询
-
-连接查询、子查询、合并结果
-
 ### 数据库设计范式
 
 - 第一范式(1NF)：要求数据库表的每一列都是不可分割的基本数据项，同一列中不能有多个值
@@ -61,74 +39,53 @@ INSERT、SELECT、UPDATE、DELETE
 - char：擅于存储经常改变的值，或者长度相对固定的值。比如 type、ip 地址或 md5 之类的数据，不容易产生碎片
 - varchar：善于存储值的长短不一的列，也是用的最多的一种类型，节省磁盘空间，保存可变长度字符串。这也是 innodb 官方推荐的类型
 
-### LEFT JOIN 、RIGHT JOIN、INNER JOIN
-
-- LEFT JOIN(左连接)：获取左表所有记录，即使右表没有对应匹配的记录
-- RIGHT JOIN(右连接)： 与 LEFT JOIN 相反，用于获取右表所有记录，即使左表没有对应匹配的记录
-- INNER JOIN(内连接)：获取两个表中字段匹配关系的记录
+### MySQL 连接的使用
 
 拓展阅读 [《MySQL 连接的使用》](./01.MySQL连接的使用.md)
 
 W3c-Mysql连接的使用[《MySQL 连接的使用》](https://www.w3cschool.cn/mysql/56ik1sqv.html)
 
-### UNION、UNION ALL
-
-- UNION 操作符用于连接两个以上的 SELECT 语句的结果组合到一个结果集合中。多个 SELECT 语句会删除重复的数据
-- UNION ALL 操作符重复数据全部显示，不去重
-
-### 常用 MySQL 函数
+### 常用MySQL函数
 
 扩展阅读 [《MySQL 函数》](https://blog.csdn.net/sinat_38899493/article/details/78710482)
-
-#### 数学函数
-
-- floor(x) 返回不大于 x 的最大整数值
-- ceil/ceiling(x) 返回不小于 x 的最小整数
-- round(x) 四舍五入
-- rand() 随机函数[0, 1)
-- abs(x) 返回 x 的绝对值
-
-#### 字符串函数
-
-- concat(str1, str2, ...) 将参数连接成字符串返回
-- length(str) 返回字符串长度
-
-#### 日期和时间函数
-
-- now() 当前时间
-- curdate() 当前日期
-
-```mysql
-SELECT UNIX_TIMESTAMP('2019-05-07 22:55:00'); #1557240900
-SELECT FROM_UNIXTIME(1557240900); #2019-05-07 22:55:00
-```
-
-#### 系统信息函数
-
-- VERSION() 返回数据库的版本号
-- LAST_INSERT_ID() 返回最后生成的 AUTO_INCREMENT 值
-
-#### 加密函数
-
-- PASSWORD(str) 对字符串 str 进行加密
-- MD5(str) 对字符串 str 进行加密
-
-#### 格式化函数
-
-- FORMAT(x, n) 可以将数字 x 进行格式化，保留到小数点后 n 位，四舍五入
-
-```mysql
-SELECT FORMAT(2.7895, 2); #2.79
-```
 
 ### MySQL索引原理和实现
 
 #### 索引原理和实现
+
 扩展阅读 [《MySQL索引原理和实现》](./04.Mysql索引原理和实现.md)
 
-### 锁
+#### Mysql索引查询失效的情况
+扩展阅读 [《索引失效》](https://blog.csdn.net/wuseyukui/article/details/72312574)
 
-### 事务
+扩展阅读 [《索引失效》](https://www.cnblogs.com/wdss/p/11186411.html)
+
+1、like 以%开头，索引无效；当like前缀没有%，后缀有%时，索引有效。
+
+2、 or语句前后没有同时使用索引。当or左右查询字段只有一个是索引，该索引失效，只有当or左右查询字段均为索引时，才会生效
+
+3、 组合索引，如果查询中没有用到联合索引的第一个字段，则不会走索引
+
+4、数据类型出现隐式转化。如varchar不加单引号的话可能会自动转换为int型，使索引无效，产生全表扫描
+
+5、 在索引列上使用 IS NULL 或 IS NOT NULL操作。索引是不索引空值的，所以这样的操作不能使用索引，可以用其他的办法处理，例如：数字类型，判断大于0，字符串类型设置一个默认值，判断是否等于默认值即可
+
+6、 在索引字段上使用not，<>，!=。不等于操作符是永远不会用到索引的，因此对它的处理只会产生全表扫描。 优化方法： key<>0 改为 key>0 or key<0
+
+7、对索引字段进行计算操作、字段上使用函数。（索引为 emp(ename,empno,sal)）
+
+8、当全表扫描速度比索引速度快时，mysql会使用全表扫描，此时索引失效
+
+#### Mysql联合索引
+扩展阅读 [《联合索引》](https://blog.csdn.net/wdjxxl/article/details/79790421)
+
+
+### 锁机制
+
+扩展阅读 [《Mysql中的锁机制》](https://www.cnblogs.com/leedaily/p/8378779.html)
+
+### 事务隔离级别
+
 扩展阅读 [《MySQL的四种事务隔离级别》](https://www.cnblogs.com/jkko123/p/10181870.html)
 
 ### 常见存储引擎
