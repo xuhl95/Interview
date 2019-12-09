@@ -79,6 +79,8 @@ W3c-Mysql连接的使用[《MySQL 连接的使用》](https://www.w3cschool.cn/m
 #### Mysql联合索引
 扩展阅读 [《联合索引》](https://blog.csdn.net/wdjxxl/article/details/79790421)
 
+#### MySQL EXPLAIN 输出信息解读
+扩展阅读 [《explain 输出信息解读》](https://www.cnblogs.com/wangfengming/articles/8275448.html)
 
 ### 锁机制
 
