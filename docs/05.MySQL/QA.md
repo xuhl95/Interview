@@ -92,6 +92,9 @@ W3c-Mysql连接的使用[《MySQL 连接的使用》](https://www.w3cschool.cn/m
 
 ### 常见存储引擎
 
+#### MyISAM与InnoDB 的区别
+扩展阅读 [《MyISAM与InnoDB 的区别》](https://blog.csdn.net/qq_35642036/article/details/82820178)
+
 #### InnoDB
 
 - 很重要的存储引擎，很多个人和公司都对其贡献代码，而不仅仅是 Oracle 公司的开发团队
