@@ -1,9 +1,5 @@
 # Mysql整理
 
-参考文章
-
-[MyISAM与InnoDB的索引差异](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961494&idx=1&sn=34f1874c1e36c2bc8ab9f74af6546ec5&chksm=bd2d0d4a8a5a845c566006efce0831e610604a43279aab03e0a6dde9422b63944e908fcc6c05&scene=21#wechat_redirect)
-
 ## 目录
 
 - [mysql教程](#mysql教程)
@@ -21,7 +17,8 @@
   - [什么时候不需要创建索引](#什么时候不需要创建索引)
   - [联合索引(组合索引)](https://blog.csdn.net/wdjxxl/article/details/79790421)
   - [读完这篇彻底弄清楚MySQL优化问题](https://zhuanlan.zhihu.com/p/72855648)
-  - 聚集索引和非聚集索引区别
+  - [聚集索引和非聚集索引](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961494&idx=1&sn=34f1874c1e36c2bc8ab9f74af6546ec5&chksm=bd2d0d4a8a5a845c566006efce0831e610604a43279aab03e0a6dde9422b63944e908fcc6c05&scene=21#wechat_redirect)
+  - [MySQL索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
   
 - [Explain分析sql](https://www.cnblogs.com/wangfengming/articles/8275448.html)
   
