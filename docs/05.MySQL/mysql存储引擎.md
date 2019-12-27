@@ -47,6 +47,8 @@ Innodb的行锁是实现在索引上的，而不是锁在物理行记录上。�
 ### Innodb为什么推荐使用自增ID作为主键
 自增ID可以保证每次插入时B+索引是从右边扩展的，可以避免B+树频繁合并和分裂（对比使用UUID）。如果使用字符串主键和随机主键，会使得数据随机插入，效率比较差
 
+参考文章 [InnoDB表为什么要建议用自增列做主键](https://blog.csdn.net/wukong_666/article/details/54982712)
+
 ### innodb引擎的4大特性
 - 插入缓冲（insert buffer)
 - 二次写(double write)

@@ -1,10 +1,13 @@
 # Mysql整理
 
+
 ## 目录
 
 - [mysql教程](#mysql教程)
 
 - mysql体系结构
+
+- [mysql技术文章](./mysql技术文章.md)
 
 - [设计范式](#设计范式)
 
@@ -31,11 +34,11 @@
   - 分布式事务
   
 - 存储引擎
-  - Innodb
+  - [Innodb](./mysql存储引擎.md)
   
-  - Myisam
+  - [Myisam](./mysql存储引擎.md)
   
-  - Innodb和Myisam存储引擎区别
+  - [Innodb和Myisam存储引擎区别]((./mysql存储引擎.md#MySQL存储引擎——MyISAM与Innodb区别))
   
 - mysql优化
 
