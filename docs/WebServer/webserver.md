@@ -10,3 +10,4 @@
    - [Nginx 所使用的 epoll 模型是什么](https://www.toutiao.com/a6724547462964445704)
    - [Nginx面试中最常见的18道题](https://blog.csdn.net/Y0Q2T57s/article/details/88084000)
 - apache
+- [从输入URL到页面展示到底发生了什么](https://juejin.im/entry/5b44155f6fb9a04f932fdf80)
