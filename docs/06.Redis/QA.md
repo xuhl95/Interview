@@ -1,5 +1,3 @@
-# 问题与简答
-
 ## Redis 篇
 
 扩展阅读[《官方文档》](https://redis.io/documentation)
@@ -8,44 +6,25 @@
 
 扩展阅读[《Redis详解》](https://www.cnblogs.com/ysocean/category/1221478.html)
 
-#### 1、redis的简介与安装
-
-扩展阅读 [《redis的简介与安装》](https://www.cnblogs.com/ysocean/p/9074353.html)
-
-#### 2、redis的配置文件介绍
-扩展阅读 [《redis的配置文件介绍》](https://www.cnblogs.com/ysocean/p/9074787.html)
-
-#### 3、redis的五大数据类型详细用法
-扩展阅读 [《redis的五大数据类型详细用法》](https://www.cnblogs.com/ysocean/p/9080940.html)
-
-#### 4、redis的底层数据结构
-
-扩展阅读 [《redis的底层数据结构》](https://www.cnblogs.com/ysocean/p/9080942.html)
-
-#### 5、redis的五大数据类型实现原理
-
-扩展阅读 [《redis的五大数据类型实现原理》](https://www.cnblogs.com/ysocean/p/9102811.html)
-
-#### 6、RDB 持久化
-
-扩展阅读 [《RDB 持久化》](https://www.cnblogs.com/ysocean/p/9114268.html)
-
-#### 7、AOF 持久化
-
-扩展阅读 [《AOF 持久化》](https://www.cnblogs.com/ysocean/p/9114267.html)
-
-#### 8、主从复制
-
-扩展阅读 [《主从复制》](https://www.cnblogs.com/ysocean/p/9143118.html)
+- [redis的简介与安装](https://www.cnblogs.com/ysocean/p/9074353.html)
+- [redis的配置文件介绍](https://www.cnblogs.com/ysocean/p/9074787.html)
+- [redis的五大数据类型详细用法](https://www.cnblogs.com/ysocean/p/9080940.html)
+- [redis的底层数据结构](https://www.cnblogs.com/ysocean/p/9080942.html)
+- [redis的五大数据类型实现原理](https://www.cnblogs.com/ysocean/p/9102811.html)
+- [RDB 持久化](https://www.cnblogs.com/ysocean/p/9114268.html)
+- [AOF 持久化](https://www.cnblogs.com/ysocean/p/9114267.html)
+- [主从复制](https://www.cnblogs.com/ysocean/p/9143118.html)
+- [缓存穿透，缓存击穿，缓存雪崩解决方案分析](#缓存穿透，缓存击穿，缓存雪崩解决方案分析)
+- 如何实现分布式锁
+- [常见问题解析](#常见问题解析)
 
 ### redis 70题解析
-
-扩展阅读 [redis 70题解析](./Redis70题解析.pdf)
+[redis 70题解析](./Redis70题解析.pdf)
 
 ### Redis基础、高级特性与性能调优
 原文地址[Redis基础、高级特性与性能调优](https://www.jianshu.com/p/2f14bc570563)
 
-### Redis 与 Memcache 区别
+### Redis与Memcache 区别
 
 |对比项|Redis|Memcache|
 |-|-|-|
@@ -97,61 +76,6 @@ redis> EXEC  #执行
 
 ### 如何实现分布式锁
 
-#### 方式一
-
-```text
-tryLock() {
-    SETNX Key 1 Seconds
-}
-release() {
-    DELETE Key
-}
-```
-
-缺陷：C<sub>1</sub> 执行时间过长未主动释放锁，C<sub>2</sub> 在 C<sub>1</sub> 的锁超时后获取到锁，C<sub>1</sub> 和 C<sub>2</sub> 都同时在执行，可能造成数据不一致等未知情况。如果 C<sub>1</sub> 先执行完毕，则会释放 C<sub>2</sub> 的锁，此时可能导致另外一个 C<sub>3</sub> 获取到锁
-
-#### 方式二
-
-```text
-tryLock() {
-    SETNX Key UnixTimestamp Seconds
-}
-release() {
-    EVAL (
-        //LuaScript
-        if redis.call("get", KEYS[1] == ARGV[1]) then
-            return redis.call("del", KEYS[1])
-        else
-            return 0
-        end
-    )
-}
-```
-
-缺陷：极高并发场景下(如抢红包场景)，可能存在 UnixTimestamp 重复问题。分布式环境下物理时钟一致性，也无法保证，也可能存在 UnixTimestamp 重复问题
-
-#### 方式三
-
-```text
-tryLock() {
-    SET Key UniqId Seconds
-}
-release() {
-    EVAL (
-        //LuaScript
-        if redis.call("get", KEYS[1]) == ARGV[1] then
-            return redis.call("del", KEYS[1])
-        else
-            return 0
-        end
-    )
-}
-```
-
-> 执行 `SET key value NX` 的效果等同于执行 `SETNX key value`
-
-目前最优的分布式锁方案，但是如果在集群下依然存在问题。由于 Redis 集群数据同步为异步，假设在 Master 节点获取到锁后未完成数据同步情况下 Master 节点 crash，在新的 Master 节点依然可以获取锁，所以多个 Client 同时获取到了锁
-
 ### Redis 过期策略及内存淘汰机制
 
 #### 过期策略
@@ -179,35 +103,37 @@ Redis 的过期策略就是指当 Redis 中缓存的 Key 过期了，Redis 如�
 - volatile-random：在设置了过期时间的键中，随机移除某些 key
 - volatile-ttl：在设置了过期时间的键中，有更早过期时间的 key 优先移除
 
-### 为什么 Redis 是单线程的
+### 常见问题解析
+
+#### 为什么 Redis 是单线程的
 
 Redis 是基于内存的操作，CPU 不是 Redis 的瓶颈，Redis 瓶颈最有可能是内存或网络。而且单线程容易实现，避免了不必要的上下文切换和竞争条件，不存在多线程切换消耗 CPU
 
-### Redis单线程的优劣势
+#### Redis单线程的优劣势
 
-#### 单进程单线程优势
+##### 单进程单线程优势
 - 代码更清晰，处理逻辑更简单
 
 - 不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗
 
 - 不存在多进程或者多线程导致的切换而消耗CPU
  
-#### 单进程单线程弊端
+##### 单进程单线程弊端
 
 - 无法发挥多核CPU性能，不过可以通过在单机开多个Redis实例来完善
 
-### Redis的高并发和快速原因
+#### Redis的高并发和快速原因
 1、redis是基于内存的，内存的读写速度非常快；
 
 2、redis是单线程的，省去了很多上下文切换线程的时间；
 
 3、redis使用多路复用技术，可以处理并发的连接。非阻塞IO 内部实现采用epoll，采用了epoll+自己实现的简单的事件框架。epoll中的读、写、关闭、连接都转化成了事件，然后利用epoll的多路复用特性，绝不在io上浪费一点时间
 
-### 如何利用 CPU 多核心
+#### 如何利用 CPU 多核心
 
 在单机单实例下，如果操作都是 O(N)、O(log(N)) 复杂度，对 CPU 消耗不会太高。为了最大利用 CPU，单机可以部署多个实例
 
-### Redis为什么这么快
+#### Redis为什么这么快
 
 1、完全基于内存，绝大部分请求是纯粹的内存操作，非常快速。数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)；
 
@@ -219,9 +145,9 @@ Redis 是基于内存的操作，CPU 不是 Redis 的瓶颈，Redis 瓶颈最有
 
 5、使用底层模型不同，它们之间底层实现方式以及与客户端之间通信的应用协议不一样，Redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求
 
-### Redis单核CPU占用过高
+#### Redis单核CPU占用过高
 
-#### 出现cpu过高的原因有：
+##### 出现cpu过高的原因有：
 
 1、连接数过多，通过redis-cli info | grep connected_clients查看
 
@@ -231,7 +157,7 @@ Redis 是基于内存的操作，CPU 不是 Redis 的瓶颈，Redis 瓶颈最有
 
 4、aof重写/rdb fork发生？瞬间会堵一下Redis服务器
 
-#### 对应解决方案：
+##### 对应解决方案：
 1、连接数过多解决：
 
 1.1 关闭僵尸连接
