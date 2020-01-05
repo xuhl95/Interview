@@ -27,12 +27,15 @@
 - [Explain分析sql](https://www.cnblogs.com/wangfengming/articles/8275448.html)
   
 - 锁
+   - 锁详解
+   - 乐观锁/悲观锁
 
 - 事务
   - 什么是事务
   - [事务隔离级别](#事务隔离级别)
   - 两阶段提交
   - 分布式事务
+  - mvcc
   
 - 存储引擎
   - [Innodb](./mysql存储引擎.md)
@@ -40,6 +43,7 @@
   - [Myisam](./mysql存储引擎.md)
   
   - [Innodb和Myisam存储引擎区别]((./mysql存储引擎.md#MySQL存储引擎——MyISAM与Innodb区别))
+  - [InnoDB的磁盘文件及落盘机制](https://zhuanlan.zhihu.com/p/62251242)
   
 - mysql优化
 
@@ -47,6 +51,8 @@
   - [主从复制原理](https://baijiahao.baidu.com/s?id=1617888740370098866&wfr=spider&for=pc)
   - 半同步复制
 - [MySQL日志的分类](https://blog.csdn.net/lzh_00/article/details/90299354)
+
+- mysql 分库 分表
   
   
 ### 关系型数据库
