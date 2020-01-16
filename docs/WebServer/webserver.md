@@ -11,3 +11,4 @@
    - [Nginx面试中最常见的18道题](https://blog.csdn.net/Y0Q2T57s/article/details/88084000)
 - apache
 - [从输入URL到页面展示到底发生了什么](https://juejin.im/entry/5b44155f6fb9a04f932fdf80)
+- nginx 负载均衡算法
