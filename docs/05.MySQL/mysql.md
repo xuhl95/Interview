@@ -47,6 +47,7 @@
   - [Innodb为什么推荐使用自增ID作为主键](#innodb为什么推荐使用自增id作为主键)
   - [innodb引擎的4大特性](#innodb引擎的4大特性)
   - [innodb的磁盘文件及落盘机制](https://zhuanlan.zhihu.com/p/62251242)
+  - [Innodb架构介绍之磁盘篇](https://zhuanlan.zhihu.com/p/95165042)
   
 - [mysql优化](#mysql优化)
 
