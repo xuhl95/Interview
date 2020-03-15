@@ -10,7 +10,8 @@
 
 - [设计范式](#设计范式)
 
-- 索引
+- [索引](#索引)
+  - [mysql索引](#mysql索引)
   - [mysql为什么用b+树做索引](#mysql为什么用b+树做索引)
   - [索引的实现原理](./mysql索引及实现原理.md)
   - [索引的优缺点](#索引的优缺点)
@@ -37,6 +38,8 @@
   - mvcc
   
 - [存储引擎](#存储引擎)
+  - [存储引擎概述](#存储引擎概述)
+  - [innodb存储引擎](#innodb存储引擎)
   - [myisam与innodb区别](#myisam与innodb区别)
   - [myisam与innodb适应场景](#myisam与innodb如何选择)
   - [innodb中一棵B+树能存多少行数据](#innodb中一棵B+树能存多少行数据)
@@ -44,7 +47,7 @@
   - [myisam](./mysql存储引擎.md)
   - [innodb的磁盘文件及落盘机制](https://zhuanlan.zhihu.com/p/62251242)
   
-- mysql优化(#mysql优化)
+- [mysql优化](#mysql优化)
 
 - mysql复制
   - [主从复制原理](#mysql主从复制原理)
@@ -69,6 +72,12 @@
 - 第一范式(1NF)：要求数据库表的每一列都是不可分割的基本数据项，同一列中不能有多个值
 - 第二范式(2NF)：唯一性约束，每条记录有唯一标示，所有的非主键字段均需依赖于主键字段
 - 第三范式(3NF)：冗余性约束，非主键字段间不能相互依赖
+
+## 索引
+
+### mysql索引
+
+参考文章 [mysql索引](https://www.cnblogs.com/Aiapple/p/5693239.html)
 
 ### mysql为什么用b+树做索引
 [《原文-mysql为什么用b+树做索引》](https://www.cnblogs.com/xufengnian/p/11885724.html#_label2)
@@ -180,10 +189,11 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
 ### 事务
 
 #### 什么是事务
-事务就是一组一起成功或一起失败的sql语句。事务还应该具备，原子性，一致性，隔离性和持久性
+
+一系列有序的数据库操作：要么全部成功,要么全部回退到操作前状态,中间状态对其他连接不可见
 
 #### 事务隔离级别
-[事务隔离级别](https://www.cnblogs.com/jkko123/p/10181870.html)
+[事务隔离级别](https://www.cnblogs.com/Aiapple/p/5686554.html)
 
 #### 分布式事务
 - 参考文章:
@@ -191,6 +201,14 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
     - [理解分布式系统—从ACID到BASE](https://blog.csdn.net/lemon89/article/details/53750464)
     
 ### 存储引擎
+
+#### 存储引擎概述
+
+参考文章 [《存储引擎概述》](https://www.cnblogs.com/Aiapple/p/5687561.html)
+
+### innodb存储引擎
+
+参考文章 [《innodb存储引擎》](https://www.cnblogs.com/Aiapple/p/5792939.html?spm=a2c4e.10696291.0.0.48ef19a41AArtz)
 
 #### myisam与innodb区别
 
@@ -275,11 +293,18 @@ B+树是在B树的基础上进行改造，它的数据都在叶子结点，同�
 
 参考文章 [《我必须得告诉大家的MySQL优化原理2》](https://www.jianshu.com/p/01b9f028d9c7)
 
+参考文章 [《mysql优化》](https://www.cnblogs.com/Aiapple/p/5697229.html)
+
+
 ### mysql复制
 
 #### mysql主从复制原理
 
 参考文章 [《mysql复制原理》](https://baijiahao.baidu.com/s?id=1617888740370098866&wfr=spider&for=pc)
+
+参考文章 [《mysql复制原理》](https://www.cnblogs.com/Aiapple/p/5792939.html?spm=a2c4e.10696291.0.0.48ef19a41AArtz)
+
+参考文章 [《mysql主从复制实践》](https://www.cnblogs.com/Aiapple/p/5793786.html)
 
 #### mysql主从同步延迟分析及解决方案
 
