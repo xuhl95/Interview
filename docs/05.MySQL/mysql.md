@@ -74,7 +74,8 @@
 - [InnoDB的缓冲池](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962450&idx=1&sn=ce17c4da8d20ce275f75d0f2ef5e40c9&chksm=bd2d098e8a5a809834aaa07da0d7546555385543fb6d687a7cf94d183ab061cd301a76547411&mpshare=1&scene=23&srcid=&sharer_sharetime=1577416523221&sharer_shareid=ace4730136c387f33fdbac348d21258c#rd)
 - [写缓冲(change buffer)](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962467&idx=1&sn=899ea157b0fc6f849ec80a4d055a309b&chksm=bd2d09bf8a5a80a972a2e16a190ed7dffe03f89015ead707bdfcc5aeb8388fb278f397c125f1&mpshare=1&scene=23&srcid=&sharer_sharetime=1577416865513&sharer_shareid=ace4730136c387f33fdbac348d21258c#rd)
 - [mysql原理与特性](https://www.cnblogs.com/Aiapple/tag/mysql%E5%8E%9F%E7%90%86%E4%B8%8E%E7%89%B9%E6%80%A7/)
-- [《深入精通Mysql系列文章推荐》](https://zhuanlan.zhihu.com/p/101319550)![](./assets/深入精通Mysql系列其他文章推荐.png)
+- [《深入精通Mysql系列文章推荐》](https://zhuanlan.zhihu.com/p/101319550)
+![](./assets/深入精通Mysql系列其他文章推荐.png)
 
 ### 设计范式
 
