@@ -4,6 +4,8 @@
 - [php7程序执行过程](#php7程序执行过程)
 - [Nginx与FPM的工作机制](#Nginx与FPM的工作机制)
 - [php进程间通信的通信的几种方式](#php进程间通信的通信的几种方式)
+- [php-fpm 三种运行方式](#php-fpm 三种运行方式)
+- [php-fpm配置文件详解](#php-fpm配置文件详解)
 - [php-fpm.conf 配置详解]()
 - [php新特性](#php新特性)
 - [为什么PHP7比PHP5性能提升了](#为什么PHP7比PHP5性能提升了)
@@ -150,8 +152,15 @@ session_start(&#91;
 
 #### php进程间通信的通信的几种方式
 
-1、
 [《php进程间通信的通信的几种方式》]()
+
+#### php-fpm 三种运行方式
+
+[《php-fpm 三种运行方式》](https://www.cnblogs.com/xuey/p/9573080.html)
+
+#### php-fpm配置文件详解
+
+[《php-fpm配置文件详解》](https://www.cnblogs.com/jonsea/p/5522018.html)
 
 #### 为什么PHP7比PHP5性能提升了
 
