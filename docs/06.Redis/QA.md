@@ -1,10 +1,10 @@
-## Redis 篇
+## redis 篇
 
 扩展阅读[《官方文档》](https://redis.io/documentation)
 
-### Redis详解
+### redis详解
 
-扩展阅读[《Redis详解》](https://www.cnblogs.com/ysocean/category/1221478.html)
+扩展阅读[《redis详解》](https://www.cnblogs.com/ysocean/category/1221478.html)
 
 - [redis的简介与安装](https://www.cnblogs.com/ysocean/p/9074353.html)
 - [redis的配置文件介绍](https://www.cnblogs.com/ysocean/p/9074787.html)
@@ -13,20 +13,22 @@
 - [redis的五大数据类型实现原理](https://www.cnblogs.com/ysocean/p/9102811.html)
 - [RDB 持久化](https://www.cnblogs.com/ysocean/p/9114268.html)
 - [AOF 持久化](https://www.cnblogs.com/ysocean/p/9114267.html)
+- [redis持久化](https://www.cnblogs.com/itdragon/p/7906481.html)
 - [主从复制](https://www.cnblogs.com/ysocean/p/9143118.html)
 - [缓存穿透，缓存击穿，缓存雪崩解决方案分析](#缓存穿透，缓存击穿，缓存雪崩解决方案分析)
 - 如何实现分布式锁
 - [常见问题解析](#常见问题解析)
+- [redis和memcache和mongodb的区别](#redis和memcache和mongodb的区别)
 
 ### redis 70题解析
-[redis 70题解析](./Redis70题解析.pdf)
+[redis 70题解析](./redis70题解析.pdf)
 
-### Redis基础、高级特性与性能调优
-原文地址[Redis基础、高级特性与性能调优](https://www.jianshu.com/p/2f14bc570563)
+### redis基础、高级特性与性能调优
+原文地址[redis基础、高级特性与性能调优](https://www.jianshu.com/p/2f14bc570563)
 
-### Redis与Memcache 区别
+### redis和memcache和mongodb的区别
 
-|对比项|Redis|Memcache|
+|对比项|redis|memcache|
 |-|-|-|
 |数据结构|丰富数据类型|只支持简单 KV 数据类型|
 |数据一致性|事务|cas|
@@ -34,11 +36,50 @@
 |网络IO|单线程 IO 复用|多线程、非阻塞 IO 复用|
 |内存管理机制|现场申请内存|预分配内存|
 
-扩展阅读[《redis和memcache区别，源码怎么说》](../14.对比篇/redis和memcache区别.md)
+扩展阅读[《redis和memcache区别，源码怎么说》](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961272&idx=1&sn=79ad515b013b0ffc33324db86ba0f834&chksm=bd2d02648a5a8b728db094312f55574ec521b30e3de8aacf1d2d948a3ac24dbf30e835089fa7&scene=21#wechat_redirect)
+
+扩展阅读 [《redis、memcache和mongodb的区别》](https://www.cnblogs.com/tuyile006/p/6382062.html)
 
 ### 缓存穿透，缓存击穿，缓存雪崩解决方案分析
 
-扩展阅读[《缓存穿透，缓存击穿，缓存雪崩》](https://www.cnblogs.com/sbj-dawn/p/11116673.html)
+扩展阅读[《缓存穿透，缓存击穿，缓存雪崩》](https://www.cnblogs.com/snail-gao/p/11846312.html)
+
+二、常见问题
+
+1、缓存穿透
+
+ 访问一个不存在的key，缓存不起作用，请求会穿透到DB，流量大时DB会挂掉。
+
+解决方案
+
+（1）采用布隆过滤器，使用一个足够大的bitmap，用于存储可能访问的key，不存在的key直接被过滤；
+
+（2）拦截器，id<=0的直接拦截。
+
+（3）从cache和db都取不到，可以将key-value写为key-null，设置较短过期时间，如30秒（设置太长会导致正常情况也没法使用）。这样可以防止攻击用户反复用同一个id暴力攻击。
+
+2、缓存击穿
+
+一个存在的key，在缓存过期的一刻，同时有大量的请求，这些请求都会击穿到DB，造成瞬时DB请求量大、压力骤增。
+
+解决方案
+
+（1）设置热点数据永远不过期。
+
+（2）加互斥锁。
+
+3、缓存雪崩
+
+
+大量的key设置了相同的过期时间，导致在缓存在同一时刻全部失效，造成瞬时DB请求量大、压力骤增，引起雪崩。
+
+解决方案
+
+（1）缓存数据的过期时间设置随机，防止同一时间大量数据过期现象发生。
+
+（2）如果缓存数据库是分布式部署，将热点数据均匀分布在不同搞得缓存数据库中。
+
+（3）设置热点数据永远不过期。
 
 ### 发布订阅
 
@@ -48,7 +89,7 @@
 
 扩展阅读[redis持久化](http://doc.redisfans.com/topic/persistence.html)
 
-### Redis 事务
+### redis 事务
 
 扩展阅读[《redis事务》](http://doc.redisfans.com/topic/transaction.html)
 
@@ -70,17 +111,17 @@ redis> EXEC  #执行
 4) PONG
 ```
 
-> 在 Redis 事务中如果有某一条命令执行失败，其后的命令仍然会被继续执行
+> 在 redis 事务中如果有某一条命令执行失败，其后的命令仍然会被继续执行
 
 > 使用 DISCARD 可以取消事务，放弃执行事务块内的所有命令
 
 ### 如何实现分布式锁
 
-### Redis 过期策略及内存淘汰机制
+### redis 过期策略及内存淘汰机制
 
 #### 过期策略
 
-Redis 的过期策略就是指当 Redis 中缓存的 Key 过期了，Redis 如何处理
+redis 的过期策略就是指当 redis 中缓存的 Key 过期了，redis 如何处理
 
 - 定时过期：每个设置过期时间的 Key 创建定时器，到过期时间立即清除。内存友好，CPU 不友好
 
@@ -105,11 +146,11 @@ Redis 的过期策略就是指当 Redis 中缓存的 Key 过期了，Redis 如�
 
 ### 常见问题解析
 
-#### 为什么 Redis 是单线程的
+#### 为什么 redis 是单线程的
 
 1.官方答案
 
-因为Redis是基于内存的操作，CPU不是Redis的瓶颈，Redis的瓶颈最有可能是机器内存的大小或者网络带宽。既然单线程容易实现，而且CPU不会成为瓶颈，那就顺理成章地采用单线程的方案了。
+因为redis是基于内存的操作，CPU不是redis的瓶颈，redis的瓶颈最有可能是机器内存的大小或者网络带宽。既然单线程容易实现，而且CPU不会成为瓶颈，那就顺理成章地采用单线程的方案了。
 
 2.性能指标
 
@@ -119,7 +160,7 @@ Redis 的过期策略就是指当 Redis 中缓存的 Key 过期了，Redis 如�
 
 1）不需要各种锁的性能消耗
 
-Redis的数据结构并不全是简单的Key-Value，还有list，hash等复杂的结构，这些结构有可能会进行很细粒度的操作，比如在很长的列表后面添加一个元素，在hash当中添加或者删除
+redis的数据结构并不全是简单的Key-Value，还有list，hash等复杂的结构，这些结构有可能会进行很细粒度的操作，比如在很长的列表后面添加一个元素，在hash当中添加或者删除
 
 一个对象。这些操作可能就需要加非常多的锁，导致的结果是同步开销大大增加。
 
@@ -135,11 +176,11 @@ Redis的数据结构并不全是简单的Key-Value，还有list，hash等复杂�
 
 采用单线程，避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗 CPU。
 
-但是如果CPU成为Redis瓶颈，或者不想让服务器其他CUP核闲置，那怎么办？
+但是如果CPU成为redis瓶颈，或者不想让服务器其他CUP核闲置，那怎么办？
 
-可以考虑多起几个Redis进程，Redis是key-value数据库，不是关系数据库，数据之间没有约束。只要客户端分清哪些key放在哪个Redis进程上就可以了
+可以考虑多起几个redis进程，redis是key-value数据库，不是关系数据库，数据之间没有约束。只要客户端分清哪些key放在哪个redis进程上就可以了
 
-#### Redis单线程的优劣势
+#### redis单线程的优劣势
 
 ##### 单进程单线程优势
 - 代码更清晰，处理逻辑更简单
@@ -150,34 +191,34 @@ Redis的数据结构并不全是简单的Key-Value，还有list，hash等复杂�
  
 ##### 单进程单线程弊端
 
-- 无法发挥多核CPU性能，不过可以通过在单机开多个Redis实例来完善
+- 无法发挥多核CPU性能，不过可以通过在单机开多个redis实例来完善
 
-#### Redis的高并发和快速原因
+#### redis的高并发和快速原因
 1、redis是基于内存的，内存的读写速度非常快；
 
 2、redis是单线程的，省去了很多上下文切换线程的时间；
 
 3、redis使用多路复用技术，可以处理并发的连接。非阻塞IO 内部实现采用epoll，采用了epoll+自己实现的简单的事件框架。epoll中的读、写、关闭、连接都转化成了事件，然后利用epoll的多路复用特性，绝不在io上浪费一点时间
 
-扩展阅读 [《Redis高并发快总结》](https://www.cnblogs.com/angelyan/p/10450885.html)
+扩展阅读 [《redis高并发快总结》](https://www.cnblogs.com/angelyan/p/10450885.html)
 
 #### 如何利用 CPU 多核心
 
 在单机单实例下，如果操作都是 O(N)、O(log(N)) 复杂度，对 CPU 消耗不会太高。为了最大利用 CPU，单机可以部署多个实例
 
-#### Redis为什么这么快
+#### redis为什么这么快
 
 1、完全基于内存，绝大部分请求是纯粹的内存操作，非常快速。数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)；
 
-2、数据结构简单，对数据操作也简单，Redis中的数据结构是专门进行设计的；
+2、数据结构简单，对数据操作也简单，redis中的数据结构是专门进行设计的；
 
 3、采用单线程，避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗 CPU，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有因为可能出现死锁而导致的性能消耗；
 
 4、使用多路I/O复用模型，非阻塞IO；
 
-5、使用底层模型不同，它们之间底层实现方式以及与客户端之间通信的应用协议不一样，Redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求
+5、使用底层模型不同，它们之间底层实现方式以及与客户端之间通信的应用协议不一样，redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求
 
-#### Redis单核CPU占用过高
+#### redis单核CPU占用过高
 
 ##### 出现cpu过高的原因有：
 
@@ -187,7 +228,7 @@ Redis的数据结构并不全是简单的Key-Value，还有list，hash等复杂�
 
 3、value值过大？比如value几十兆，当然这种情况比较少，其实也可以看做是慢查询的一种
 
-4、aof重写/rdb fork发生？瞬间会堵一下Redis服务器
+4、aof重写/rdb fork发生？瞬间会堵一下redis服务器
 
 ##### 对应解决方案：
 1、连接数过多解决：
@@ -220,4 +261,4 @@ echo -n "Max open files  3000:3000" >  /proc/PID/limits
 
 5、为了Master的稳定性，主从复制不要用图状结构，用单向链表结构更稳定，即主从关系为：Master<--Slave1<--Slave2<--Slave3.......， 这样的结构也方便解决单点故障问题，实现Slave对Master的替换，也即，如果Master挂了，可以立马启用Slave1做Master，其他不变
 
-6、使用Redis负载监控工具：redis-monitor，它是一个Web可视化的 redis 监控程序
+6、使用redis负载监控工具：redis-monitor，它是一个Web可视化的 redis 监控程序

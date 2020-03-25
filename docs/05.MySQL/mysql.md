@@ -20,6 +20,7 @@
   - [什么时候需要创建索引](#什么时候需要创建索引)
   - [什么时候不需要创建索引](#什么时候不需要创建索引)
   - [联合索引(组合索引)](https://blog.csdn.net/wdjxxl/article/details/79790421)
+  - [mysql主键和唯一索引的区别](#mysql主键和唯一索引的区别)
   - [读完这篇彻底弄清楚MySQL优化问题](https://zhuanlan.zhihu.com/p/72855648)
   - [聚集索引和非聚集索引](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961494&idx=1&sn=34f1874c1e36c2bc8ab9f74af6546ec5&chksm=bd2d0d4a8a5a845c566006efce0831e610604a43279aab03e0a6dde9422b63944e908fcc6c05&scene=21#wechat_redirect)
   - [MySQL索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
@@ -51,6 +52,7 @@
   - [Innodb架构介绍之磁盘篇](https://zhuanlan.zhihu.com/p/95165042)
   
 - [mysql优化](#mysql优化)
+   - [阿里云面试官：如果是MySQL引起的CPU消耗过大，你会如何优化？]
 
 - mysql复制
   - [主从复制原理](#mysql主从复制原理)
@@ -197,6 +199,18 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
 
 - 数据重复且分布平均的字段，因此为经常查询的和经常排序的字段建立索引。注意某些数据包含大量重复数据，因此他建立索引就没有太大的效果，例如性别字段，只有男女，不适合建立索引。
 
+#### mysql主键和唯一索引的区别
+
+1、主键是一种约束，唯一索引是一种索引
+
+2、一张表只能有一个主键，但可以创建多个唯一索引
+
+3、主键创建后一定包含一个唯一索引，唯一索引并一定是主键
+
+4、主键不能为null，唯一索引可以为null
+
+5、主键可以做为外键，唯一索引不行
+
 ### 锁
 
 #### MySQL的并发控制与加锁分析
@@ -301,6 +315,10 @@ MYISAM和INNODB是Mysql数据库提供的两种存储引擎。两者的优劣可
 
 参考文章 [《mysql优化》](https://www.cnblogs.com/Aiapple/p/5697229.html)
 
+
+#### 阿里云面试官：如果是MySQL引起的CPU消耗过大，你会如何优化？
+
+参考文章 [《如果是MySQL引起的CPU消耗过大，你会如何优化》](https://zhuanlan.zhihu.com/p/114561762)
 
 ### mysql复制
 

@@ -177,3 +177,11 @@ X 个 CPU 的电脑，可接受的系统负荷最大为 `X.0` 。将`15分钟`�
 - SIGKILL：终止进程，`kill -9`
 - SIGSTOP：停止进程的执行
 - SIGCONT：恢复进程的执行
+
+### 定时任务
+
+#### crontab 用法
+
+参考文章 [<crontab 用法>](https://www.cnblogs.com/xfqboke/p/10220662.html)
+
+参考文章 [<Linux crontab命令：循环执行定时任务>](http://c.biancheng.net/view/1092.html)
