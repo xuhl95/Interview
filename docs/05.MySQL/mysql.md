@@ -216,13 +216,13 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
 
 参考文章 [《explain分析sql》](https://www.cnblogs.com/songwenjie/p/9409852.html)
 
-![](./assets/explain.jpg)
+![explain](./assets/explain.jpg)
 
-![](./assets/explain_type_1.jpg)
+![explain_type_1](./assets/explain_type_1.jpg)
 
-![](./assets/explain_type_2.jpg)
+![explain_type_2](./assets/explain_type_2.jpg)
 
-![](./assets/explain_extra.jpg)
+![explain_extra](./assets/explain_extra.jpg)
 
 ### 锁
 
