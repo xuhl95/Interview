@@ -23,7 +23,7 @@
   - [mysql主键和唯一索引的区别](#mysql主键和唯一索引的区别)
   - [聚集索引和非聚集索引](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961494&idx=1&sn=34f1874c1e36c2bc8ab9f74af6546ec5&chksm=bd2d0d4a8a5a845c566006efce0831e610604a43279aab03e0a6dde9422b63944e908fcc6c05&scene=21#wechat_redirect)
   
-- [Explain分析sql](https://www.cnblogs.com/wangfengming/articles/8275448.html)
+- [Explain分析sql](#explain分析sql)
   
 - 锁
    - 锁详解
@@ -211,6 +211,18 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
 4、主键不能为null，唯一索引可以为null
 
 5、主键可以做为外键，唯一索引不行
+
+# explain分析sql
+
+参考文章 [《explain分析sql》](https://www.cnblogs.com/songwenjie/p/9409852.html)
+
+![](./assets/explain.jpg)
+
+![](./assets/explain_type_1.jpg)
+
+![](./assets/explain_type_2.jpg)
+
+![](./assets/explain_extra.jpg)
 
 ### 锁
 

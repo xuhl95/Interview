@@ -266,3 +266,7 @@ echo -n "Max open files  3000:3000" >  /proc/PID/limits
 ### Redis 性能优化的 13 条军规
 
 原文地址 [《Redis 性能优化的 13 条军规》](https://www.toutiao.com/i6807956017473651207/?timestamp=1585222728&app=news_article&group_id=6807956017473651207&req_id=2020032619384801001404116020142494)
+
+### redis 常见面试题
+
+参考 [《Redis常见面试题》](https://www.cnblogs.com/lanqiu5ge/p/9442837.html#_label3)
