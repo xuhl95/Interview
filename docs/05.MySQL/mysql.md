@@ -252,7 +252,7 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
 
 #### innodb存储引擎
 
-参考文章 [《innodb存储引擎》](https://www.cnblogs.com/Aiapple/p/5792939.html?spm=a2c4e.10696291.0.0.48ef19a41AArtz)
+参考文章 [《innodb存储引擎》](https://www.cnblogs.com/Aiapple/p/5689634.html)
 
 #### myisam与innodb区别
 
