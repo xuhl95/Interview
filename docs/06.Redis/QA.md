@@ -262,3 +262,7 @@ echo -n "Max open files  3000:3000" >  /proc/PID/limits
 5、为了Master的稳定性，主从复制不要用图状结构，用单向链表结构更稳定，即主从关系为：Master<--Slave1<--Slave2<--Slave3.......， 这样的结构也方便解决单点故障问题，实现Slave对Master的替换，也即，如果Master挂了，可以立马启用Slave1做Master，其他不变
 
 6、使用redis负载监控工具：redis-monitor，它是一个Web可视化的 redis 监控程序
+
+### Redis 性能优化的 13 条军规
+
+原文地址 [《Redis 性能优化的 13 条军规》](https://www.toutiao.com/i6807956017473651207/?timestamp=1585222728&app=news_article&group_id=6807956017473651207&req_id=2020032619384801001404116020142494)

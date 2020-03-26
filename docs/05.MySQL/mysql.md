@@ -1,4 +1,4 @@
-# Mysql整理
+# mysql整理
 
 
 ## 目录
@@ -13,24 +13,22 @@
 - [索引](#索引)
   - [mysql索引](#mysql索引)
   - [mysql为什么用b+树做索引](#mysql为什么用b+树做索引)
-  - [索引的实现原理](./mysql索引及实现原理.md)
+  - [mysql索引及其实现原理](#mysql索引及其实现原理)
   - [索引的优缺点](#索引的优缺点)
   - [索引分类](#索引分类)
   - [索引失效条件](#索引失效条件)
   - [什么时候需要创建索引](#什么时候需要创建索引)
   - [什么时候不需要创建索引](#什么时候不需要创建索引)
-  - [联合索引(组合索引)](https://blog.csdn.net/wdjxxl/article/details/79790421)
+  - [联合索引(组合索引)](#联合索引(组合索引))
   - [mysql主键和唯一索引的区别](#mysql主键和唯一索引的区别)
-  - [读完这篇彻底弄清楚MySQL优化问题](https://zhuanlan.zhihu.com/p/72855648)
   - [聚集索引和非聚集索引](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961494&idx=1&sn=34f1874c1e36c2bc8ab9f74af6546ec5&chksm=bd2d0d4a8a5a845c566006efce0831e610604a43279aab03e0a6dde9422b63944e908fcc6c05&scene=21#wechat_redirect)
-  - [MySQL索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)
   
 - [Explain分析sql](https://www.cnblogs.com/wangfengming/articles/8275448.html)
   
 - 锁
    - 锁详解
    - 乐观锁/悲观锁
-   - [MySQL的并发控制与加锁分析](#MySQL的并发控制与加锁分析)
+   - [mysql的并发控制与加锁分析](#mysql的并发控制与加锁分析)
 
 - [事务](#事务)
   - [什么是事务](#什么是事务)
@@ -52,13 +50,13 @@
   - [Innodb架构介绍之磁盘篇](https://zhuanlan.zhihu.com/p/95165042)
   
 - [mysql优化](#mysql优化)
-   - [阿里云面试官：如果是MySQL引起的CPU消耗过大，你会如何优化？]
+   - [阿里云面试官：如果是mysql引起的CPU消耗过大，你会如何优化？]
 
 - mysql复制
   - [主从复制原理](#mysql主从复制原理)
   - [mysql主从同步延迟分析及解决方案](#mysql主从同步延迟分析及解决方案)
   - 半同步复制
-- [MySQL日志的分类](https://blog.csdn.net/lzh_00/article/details/90299354)
+- [mysql日志的分类](https://blog.csdn.net/lzh_00/article/details/90299354)
 
 - mysql 分库 分表
 
@@ -77,8 +75,8 @@
 - [InnoDB的缓冲池](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962450&idx=1&sn=ce17c4da8d20ce275f75d0f2ef5e40c9&chksm=bd2d098e8a5a809834aaa07da0d7546555385543fb6d687a7cf94d183ab061cd301a76547411&mpshare=1&scene=23&srcid=&sharer_sharetime=1577416523221&sharer_shareid=ace4730136c387f33fdbac348d21258c#rd)
 - [写缓冲(change buffer)](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962467&idx=1&sn=899ea157b0fc6f849ec80a4d055a309b&chksm=bd2d09bf8a5a80a972a2e16a190ed7dffe03f89015ead707bdfcc5aeb8388fb278f397c125f1&mpshare=1&scene=23&srcid=&sharer_sharetime=1577416865513&sharer_shareid=ace4730136c387f33fdbac348d21258c#rd)
 - [mysql原理与特性](https://www.cnblogs.com/Aiapple/tag/mysql%E5%8E%9F%E7%90%86%E4%B8%8E%E7%89%B9%E6%80%A7/)
-- [《深入精通Mysql系列文章推荐》](https://zhuanlan.zhihu.com/p/101319550)
-![](./assets/深入精通Mysql系列其他文章推荐.png)
+- [《深入精通mysql系列文章推荐》](https://zhuanlan.zhihu.com/p/101319550)
+![](./assets/深入精通mysql系列其他文章推荐.png)
 
 ### 设计范式
 
@@ -128,7 +126,7 @@ B+树的性质(下面提到的都是和B树不相同的性质)
 四、提升效率
 B树在提高了IO性能的同时并没有解决元素遍历的我效率低下的问题，正是为了解决这个问题，B+树应用而生。B+树只需要去遍历叶子节点就可以实现整棵树的遍历。而且在数据库中基于范围的查询是非常频繁的，而B树不支持这样的操作或者说效率太低。
 查找数据，最简单的方式是顺序查找。但是对于几十万上百万，甚至上亿的数据库查询就很慢了。
-所以要对查找的方式进行优化，熟悉的二分查找，二叉树可以把速度提升到O(log(n,2))，查询的瓶颈在于树的深度，最坏的情况要查找到二叉树的最深层，由于，每查找深一层，就要访问更深一层的索引文件。在多达数G的索引文件中，这将是很大的开销。所以，尽量把数据结构设计的更为‘矮胖’一点就可以减少访问的层数。在众多的解决方案中，B-/B+树很好的适合。B-树定义具体可以查阅，简而言之就是中间节点可以多余两个子节点，而且中间的元素可以是一个域。相比B-树，B+树的父节点也必须存在于子节点中，是其中最大或者最小元素，B+树的节点只存储索引key值，具体信息的地址存在于叶子节点的地址中。这就使以页为单位的索引中可以存放更多的节点。减少更多的I/O支出。因此，B+树成为了数据库比较优秀的数据结构，MySQL中myisam和innodb都是采用的B+树结构。不同的是前者是非聚集索引，后者主键是聚集索引，所谓聚集索引是物理地址连续存放的索引，在取区间的时候，查找速度非常快，但同样的，插入的速度也会受到影响而降低。聚集索引的物理位置使用链表来进行存储。
+所以要对查找的方式进行优化，熟悉的二分查找，二叉树可以把速度提升到O(log(n,2))，查询的瓶颈在于树的深度，最坏的情况要查找到二叉树的最深层，由于，每查找深一层，就要访问更深一层的索引文件。在多达数G的索引文件中，这将是很大的开销。所以，尽量把数据结构设计的更为‘矮胖’一点就可以减少访问的层数。在众多的解决方案中，B-/B+树很好的适合。B-树定义具体可以查阅，简而言之就是中间节点可以多余两个子节点，而且中间的元素可以是一个域。相比B-树，B+树的父节点也必须存在于子节点中，是其中最大或者最小元素，B+树的节点只存储索引key值，具体信息的地址存在于叶子节点的地址中。这就使以页为单位的索引中可以存放更多的节点。减少更多的I/O支出。因此，B+树成为了数据库比较优秀的数据结构，mysql中myisam和innodb都是采用的B+树结构。不同的是前者是非聚集索引，后者主键是聚集索引，所谓聚集索引是物理地址连续存放的索引，在取区间的时候，查找速度非常快，但同样的，插入的速度也会受到影响而降低。聚集索引的物理位置使用链表来进行存储。
 
 
 ### 索引分类
@@ -136,9 +134,9 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
 
 扩展阅读 [《索引分类》](https://www.cnblogs.com/luyucheng/p/6289714.html)
 
-### MySQL索引及其实现原理(基于myisam及innodb引擎)
+### mysql索引及其实现原理
 
-扩展阅读 [《MySQL索引及其实现原理》](https://cloud.tencent.com/developer/article/1125452)
+扩展阅读 [《mysql索引及其实现原理(基于myisam及innodb引擎)》](https://cloud.tencent.com/developer/article/1125452)
   
 ### 索引的优缺点
 
@@ -174,10 +172,10 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
 
 扩展阅读 [《索引失效》](https://www.cnblogs.com/wdss/p/11186411.html)
 
-### Mysql联合索引
+### mysql联合索引
 扩展阅读 [《联合索引》](https://blog.csdn.net/wdjxxl/article/details/79790421)
 
-### MySQL EXPLAIN 输出信息解读
+### mysql EXPLAIN 输出信息解读
 扩展阅读 [《explain 输出信息解读》](https://www.cnblogs.com/wangfengming/articles/8275448.html)
 
 ### 什么时候需要创建索引
@@ -216,9 +214,9 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
 
 ### 锁
 
-#### MySQL的并发控制与加锁分析
+#### mysql的并发控制与加锁分析
 
-参考文章 [《MySQL的并发控制与加锁分析》](https://www.cnblogs.com/yelbosh/p/5813865.html)
+参考文章 [《mysql的并发控制与加锁分析》](https://www.cnblogs.com/yelbosh/p/5813865.html)
 
 ### 事务
 
@@ -290,7 +288,7 @@ innodb适合：(1)可靠性要求比较高，或者要求事务；(2)表更新�
 
 2、如何选择
 
-MYISAM和INNODB是Mysql数据库提供的两种存储引擎。两者的优劣可谓是各有千秋。INNODB会支持一些关系数据库的高级功能，如事务功能和行级锁，MYISAM不支持。MYISAM的性能更优，占用的存储空间少。所以，选择何种存储引擎，视具体应用而定。
+MYISAM和INNODB是mysql数据库提供的两种存储引擎。两者的优劣可谓是各有千秋。INNODB会支持一些关系数据库的高级功能，如事务功能和行级锁，MYISAM不支持。MYISAM的性能更优，占用的存储空间少。所以，选择何种存储引擎，视具体应用而定。
 
 如果你的应用程序一定要使用事务，毫无疑问你要选择INNODB引擎。但要注意，INNODB的行级锁是有条件的。在where条件没有使用主键时，照样会锁全表。比如DELETE FROM mytable这样的删除语句。
 
@@ -312,16 +310,16 @@ MYISAM和INNODB是Mysql数据库提供的两种存储引擎。两者的优劣可
 
     
 ### mysql优化
-参考文章 [《我必须得告诉大家的MySQL优化原理》](https://www.jianshu.com/p/d7665192aaaf)
+参考文章 [《我必须得告诉大家的mysql优化原理》](https://www.jianshu.com/p/d7665192aaaf)
 
-参考文章 [《我必须得告诉大家的MySQL优化原理2》](https://www.jianshu.com/p/01b9f028d9c7)
+参考文章 [《我必须得告诉大家的mysql优化原理2》](https://www.jianshu.com/p/01b9f028d9c7)
 
 参考文章 [《mysql优化》](https://www.cnblogs.com/Aiapple/p/5697229.html)
 
 
-#### 阿里云面试官：如果是MySQL引起的CPU消耗过大，你会如何优化？
+#### 阿里云面试官：如果是mysql引起的CPU消耗过大，你会如何优化？
 
-参考文章 [《如果是MySQL引起的CPU消耗过大，你会如何优化》](https://zhuanlan.zhihu.com/p/114561762)
+参考文章 [《如果是mysql引起的CPU消耗过大，你会如何优化》](https://zhuanlan.zhihu.com/p/114561762)
 
 ### mysql复制
 
@@ -335,12 +333,12 @@ MYISAM和INNODB是Mysql数据库提供的两种存储引擎。两者的优劣可
 
 #### mysql主从同步延迟分析及解决方案
 
-参考文章 [<谈谈Mysql主从同步延迟分析及解决方案>](https://www.cnblogs.com/phpper/p/8904169.html)
+参考文章 [<谈谈mysql主从同步延迟分析及解决方案>](https://www.cnblogs.com/phpper/p/8904169.html)
 
 
 ### mysql面试题集锦
 
-#### 1、MySQL中存储索引用到的数据结构是B+树，B+树的查询时间跟树的高度有关，是log(n)，如果用hash存储，那么查询时间是O(1)。既然hash比B+树更快，为什么mysql用B+树来存储索引呢？
+#### 1、mysql中存储索引用到的数据结构是B+树，B+树的查询时间跟树的高度有关，是log(n)，如果用hash存储，那么查询时间是O(1)。既然hash比B+树更快，为什么mysql用B+树来存储索引呢？
 
 答：一、从内存角度上说，数据库中的索引一般时在磁盘上，数据量大的情况可能无法一次性装入内存，B+树的设计可以允许数据分批加载。
 
@@ -364,8 +362,10 @@ B+树是在B树的基础上进行改造，它的数据都在叶子结点，同�
 
 答：这个跟它的使用场景有关，B+树在数据库的索引中用得比较多，数据库中select数据，不一定只选一条，很多时候会选中多条，比如按照id进行排序后选100条。如果是多条的话，B+树需要做局部的中序遍历，可能要跨层访问。而B+树由于所有数据都在叶子结点不用跨层，同时由于有链表结构，只需要找到首尾，通过链表就能把所有数据取出来了。
 
-#### 史上最详细的一线大厂Mysql面试题详解
+#### 史上最详细的一线大厂mysql面试题详解
 
-原文地址 [《史上最详细的一线大厂Mysql面试题详解》](https://zhuanlan.zhihu.com/p/68026501)
+原文地址 [《史上最详细的一线大厂mysql面试题详解》](https://zhuanlan.zhihu.com/p/68026501)
 
-#### 
+#### mysql学习笔记：count(1)、count(*)、count（字段）的区别
+
+参考文章 [《count(1)、count(*)、count（字段）的区别》](https://www.cnblogs.com/hider/p/11726690.html)
