@@ -21,7 +21,7 @@
 ![php7执行过程](./assets/php7-执行过程)
 
 #### Nginx与FPM的工作机制
-[Nginx与FPM的工作机制](https://zhuanlan.zhihu.com/p/20694204)
+[Nginx与FPM的工作机制](https://www.jianshu.com/p/da152c6fdfa6)
 
 
 #### php新特性
@@ -152,7 +152,13 @@ session_start(&#91;
 
 #### php进程间通信的通信的几种方式
 
-[《php进程间通信的通信的几种方式》]()
+- 管道
+- FIFO
+- 消息队列
+- 信号量
+- 共享内存 
+
+[《php进程间通信的通信的几种方式》](https://www.cnblogs.com/zgq0/p/8780893.html)
 
 #### php-fpm 三种运行方式
 

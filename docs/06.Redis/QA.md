@@ -11,9 +11,7 @@
 - [redis的五大数据类型详细用法](https://www.cnblogs.com/ysocean/p/9080940.html)
 - [redis的底层数据结构](https://www.cnblogs.com/ysocean/p/9080942.html)
 - [redis的五大数据类型实现原理](https://www.cnblogs.com/ysocean/p/9102811.html)
-- [RDB 持久化](https://www.cnblogs.com/ysocean/p/9114268.html)
-- [AOF 持久化](https://www.cnblogs.com/ysocean/p/9114267.html)
-- [redis持久化](https://www.cnblogs.com/itdragon/p/7906481.html)
+- [redis持久化](#redis持久化)
 - [主从复制](https://www.cnblogs.com/ysocean/p/9143118.html)
 - [缓存穿透，缓存击穿，缓存雪崩解决方案分析](#缓存穿透，缓存击穿，缓存雪崩解决方案分析)
 - 如何实现分布式锁
@@ -43,6 +41,8 @@
 ### 缓存穿透，缓存击穿，缓存雪崩解决方案分析
 
 扩展阅读[《缓存穿透，缓存击穿，缓存雪崩》](https://www.cnblogs.com/snail-gao/p/11846312.html)
+
+扩展阅读[《谈关于缓存穿透+击穿+雪崩，热点数据失效问题的解决方案》](https://www.toutiao.com/i6811443473862885899/?tt_from=weixin&utm_campaign=client_share&wxshare_count=1&timestamp=1585981210&app=news_article&utm_source=weixin&utm_medium=toutiao_android&req_id=20200404142010010014040091362FB821&group_id=6811443473862885899)
 
 二、常见问题
 
@@ -85,9 +85,11 @@
 
 扩展阅读[《redis发布订阅》](http://doc.redisfans.com/topic/pubsub.html)
 
-### 持久化策略 (RDB/AOF 持久化)
+### redis持久化
 
-扩展阅读[redis持久化](http://doc.redisfans.com/topic/persistence.html)
+扩展阅读[《redis持久化》](https://segmentfault.com/a/1190000016021217)
+
+扩展阅读[《redis持久化》](https://segmentfault.com/a/1190000015983518)
 
 ### redis 事务
 
