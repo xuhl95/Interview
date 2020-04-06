@@ -174,6 +174,16 @@ Session：会话机制(Session)在 PHP 中用于保持用户连续访问Web应�
 
 原文地址[《COOKIE和SESSION的使用以及区别》](https://www.imooc.com/article/14919)
 
+### cookie和session区别
+
+（1）存储位置：Cookie存储在客户端浏览器中，相对不安全；Session内容所在文件存储在服务器中，一般在根目录下的tmp文件夹中，相对更安全。
+
+（2）数量和大小限制：Cookie存储的数据在不同的浏览器会有不同的限制，一般在同一个域名下，Cookie变量数量控制在20个以内，每个cookie值的大小控制在4kb以内。session值没有大小和数量限制，但如果数量过多，会增大服务器的压力。
+
+（3）内容区别：cookie保存的内容是字符串，而服务器中的session保存的数据是对象。
+
+（4）路径区别：session不能区分路径，同一个用户在访问一个网站期间，所有的session在任何一个地方都可以访问到；而cookie中如果设置了路径参数，那么同一个网站中不同路径下的cookie互相是访问不到的。
+
 ### 抽象类与接口有什么区别与联系
 
 #### 抽象类
@@ -485,6 +495,14 @@ php 代码问题，文件权限问题，资源问题
 #### 503
 
 超载或者停机维护
+
+#### 502 503 504
+
+502：nginx在这里充当的是反向代理服务器的角色，是把http协议请求转成fastcgi协议的请求，通过fastcgi_pass指令传递给php-fpm进程，当php-fpm进程响应的内容是nginx无法理解的响应，就会返回502 bad gateway
+
+503：一个http请求占用一个php-fpm进程，瞬时请求量过大时，没有足够的php-fpm进程去处理请求，就会返回503 service unavailable
+
+504: 单个php-fpm进程阻塞超过nginx的时间阈值返回504 gateway timeout
 
 ### 如何返回一个301重定向
 

@@ -24,15 +24,66 @@
 ### redis基础、高级特性与性能调优
 原文地址[redis基础、高级特性与性能调优](https://www.jianshu.com/p/2f14bc570563)
 
-### redis和memcache和mongodb的区别
+### redis和memcache的区别
 
 |对比项|redis|memcache|
-|-|-|-|
+|---|---|---|
 |数据结构|丰富数据类型|只支持简单 KV 数据类型|
 |数据一致性|事务|cas|
 |持久性|快照/AOF|不支持|
 |网络IO|单线程 IO 复用|多线程、非阻塞 IO 复用|
 |内存管理机制|现场申请内存|预分配内存|
+
+### redis和mongodb的区别
+
+1、内存管理机制
+
+Redis 数据全部存在内存，定期写入磁盘，当内存不够时，可以选择指定的 LRU 算法删除数据。
+
+MongoDB 数据存在内存，由 linux系统 mmap 实现，当内存不够时，只将热点数据放入内存，其他数据存在磁盘。
+
+2、支持的数据结构
+
+Redis 支持的数据结构丰富，包括hash、set、list等。
+
+MongoDB 数据结构比较单一，但是支持丰富的数据表达，索引，最类似关系型数据库，支持的查询语言非常丰富。
+
+3、数据量和性能：
+
+当物理内存够用的时候，redis>mongodb>mysql
+
+当物理内存不够用的时候，redis和mongodb都会使用虚拟内存。
+
+实际上如果redis要开始虚拟内存，那很明显要么加内存条，要么你换个数据库了。
+
+但是，mongodb不一样，只要，业务上能保证，冷热数据的读写比，使得热数据在物理内存中，mmap的交换较少。
+
+mongodb还是能够保证性能。
+
+4、性能
+
+mongodb依赖内存，TPS较高；Redis依赖内存，TPS非常高。性能上Redis优于MongoDB。
+
+5、可靠性
+
+mongodb从1.8版本后，采用binlog方式（MySQL同样采用该方式）支持持久化，增加可靠性；
+
+Redis依赖快照进行持久化；AOF增强可靠性；增强可靠性的同时，影响访问性能。
+
+可靠性上MongoDB优于Redis。
+
+6、数据分析
+
+mongodb内置数据分析功能（mapreduce）；而Redis不支持。
+
+7、事务支持情况
+
+Redis 事务支持比较弱，只能保证事务中的每个操作连续执行；mongodb不支持事务。
+
+8、集群
+
+MongoDB 集群技术比较成熟，Redis从3.0开始支持集群。
+
 
 扩展阅读[《redis和memcache区别，源码怎么说》](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961272&idx=1&sn=79ad515b013b0ffc33324db86ba0f834&chksm=bd2d02648a5a8b728db094312f55574ec521b30e3de8aacf1d2d948a3ac24dbf30e835089fa7&scene=21#wechat_redirect)
 
@@ -148,7 +199,7 @@ redis 的过期策略就是指当 redis 中缓存的 Key 过期了，redis 如�
 
 ### 常见问题解析
 
-#### 为什么 redis 是单线程的
+#### 为什么redis是单线程的
 
 1.官方答案
 
@@ -204,7 +255,7 @@ redis的数据结构并不全是简单的Key-Value，还有list，hash等复杂�
 
 扩展阅读 [《redis高并发快总结》](https://www.cnblogs.com/angelyan/p/10450885.html)
 
-#### 如何利用 CPU 多核心
+#### 如何利用CPU多核心
 
 在单机单实例下，如果操作都是 O(N)、O(log(N)) 复杂度，对 CPU 消耗不会太高。为了最大利用 CPU，单机可以部署多个实例
 
@@ -219,6 +270,12 @@ redis的数据结构并不全是简单的Key-Value，还有list，hash等复杂�
 4、使用多路I/O复用模型，非阻塞IO；
 
 5、使用底层模型不同，它们之间底层实现方式以及与客户端之间通信的应用协议不一样，redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求
+
+#### redis如何保证原子性的
+
+redis是单线程的，保证了操作的原子性
+
+对于Redis而言，命令的原子性指的是：一个操作的不可以再分，操作要么执行，要么不执行
 
 #### redis单核CPU占用过高
 

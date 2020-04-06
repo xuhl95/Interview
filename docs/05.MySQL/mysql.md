@@ -8,6 +8,8 @@
 
 - [mysql技术文章](#mysql技术文章)
 
+- [SQL语句执行过程详解](#SQL语句执行过程详解)
+
 - [设计范式](#设计范式)
 
 - [索引](#索引)
@@ -77,6 +79,10 @@
 - [mysql原理与特性](https://www.cnblogs.com/Aiapple/tag/mysql%E5%8E%9F%E7%90%86%E4%B8%8E%E7%89%B9%E6%80%A7/)
 - [《深入精通mysql系列文章推荐》](https://zhuanlan.zhihu.com/p/101319550)
 ![](./assets/深入精通mysql系列其他文章推荐.png)
+
+### SQL语句执行过程详解
+
+[SQL语句执行过程详解](https://www.jianshu.com/p/56fe9bf91448)
 
 ### 设计范式
 

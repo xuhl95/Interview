@@ -4,12 +4,15 @@
 - [php7程序执行过程](#php7程序执行过程)
 - [Nginx与FPM的工作机制](#Nginx与FPM的工作机制)
 - [php进程间通信的通信的几种方式](#php进程间通信的通信的几种方式)
-- [php-fpm 三种运行方式](#php-fpm 三种运行方式)
+- [php-fpm三种运行方式](#php-fpm三种运行方式)
 - [php-fpm配置文件详解](#php-fpm配置文件详解)
-- [php-fpm.conf 配置详解]()
+- [php-fpm.conf 配置详解](#php-fpm.conf配置详解)
 - [php新特性](#php新特性)
+- [php底层运行机制与原理](#底层运行机制与原理)
 - [为什么PHP7比PHP5性能提升了](#为什么PHP7比PHP5性能提升了)
-
+- [php安全最大化](#php安全最大化)
+- [php性能最大化](#php性能最大化)
+- [php页面静态化](#php页面静态化)
 #### php7程序执行过程
 
 1.PHP代码经过词法分析转换为有意义的Token；
@@ -175,3 +178,60 @@ session_start(&#91;
 2、改善数组结构，数组元素和hash映射表被分配在同一块内存里，降低了内存占用、提升了 cpu 缓存命中率
 
 3、改进了函数的调用机制，通过优化参数传递的环节，减少了一些指令，提高执行效率
+
+#### php底层运行机制与原理
+
+参考文章 [《php底层运行机制与原理》](https://blog.csdn.net/lili0710432/article/details/47816365?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-4&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-4)
+
+#### php安全最大化
+
+1、避免sql注入漏洞
+~~~~
+防范方法
+1 使用预编译语句绑定变量(最佳方式)
+2 使用安全的存储过程(也可能存在注入问题)
+3 检查输入数据的数据类型(可对抗注入)
+4 数据库最小权限原则
+~~~~
+
+2、防止跨网站脚本攻击(Cross Site Scripting, XSS)
+
+~~~~
+防范方法：
+1、使用htmlspecialchars函数将特殊字符转换成HTML编码，过滤输出的变量
+2、为cookie设置HttpOnly,防止cookie劫持
+~~~~
+
+3、防止跨网站请求伪造攻击(Cross Site Request Forgeries, CSRF)
+
+~~~~
+防范方法
+1 增加验证码(简单有效)
+2 检查请求来源是否合法（验证HTTPReferer字段）
+3 增加随机 token
+~~~~
+
+参考文章 [《PHP安全之Web攻击》](https://www.cnblogs.com/luyucheng/p/6234524.html)
+
+
+#### php性能最大化
+
+参考文章 [《让PHP7达到最高性能的几个Tips》](https://www.laruence.com/2015/12/04/3086.html)
+
+#### php页面静态化
+
+ob输出缓冲系列函数 [Output Control 函数](#https://www.php.net/manual/zh/ref.outcontrol.php)
+
+主要利用php输出缓冲，涉及到函数
+~~~~
+ob_start - 打开输出缓冲
+
+ob_get_contents - 返回输出缓冲区的内容
+
+ob_clean — 清空（擦掉）输出缓冲区
+
+清空（擦除）缓冲区并关闭输出缓冲
+
+ob_end_clean — 清空（擦除）缓冲区并关闭输出缓冲
+~~~~
+参考文章 [实现页面静态化，PHP是如何实现的](https://blog.csdn.net/assasin0308/article/details/90674751)
