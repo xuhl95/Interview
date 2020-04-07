@@ -91,7 +91,7 @@ MongoDB 集群技术比较成熟，Redis从3.0开始支持集群。
 
 ### 缓存穿透，缓存击穿，缓存雪崩解决方案分析
 
-扩展阅读[《缓存穿透，缓存击穿，缓存雪崩》](https://www.cnblogs.com/snail-gao/p/11846312.html)
+扩展阅读[《缓存雪崩、缓存穿透、缓存预热、缓存更新、缓存降级等问题》](https://blog.csdn.net/xlgen157387/article/details/79530877)
 
 扩展阅读[《谈关于缓存穿透+击穿+雪崩，热点数据失效问题的解决方案》](https://www.toutiao.com/i6811443473862885899/?tt_from=weixin&utm_campaign=client_share&wxshare_count=1&timestamp=1585981210&app=news_article&utm_source=weixin&utm_medium=toutiao_android&req_id=20200404142010010014040091362FB821&group_id=6811443473862885899)
 
