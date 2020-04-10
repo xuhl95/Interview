@@ -21,9 +21,6 @@
 ### redis 70题解析
 [redis 70题解析](./redis70题解析.pdf)
 
-### redis基础、高级特性与性能调优
-原文地址[redis基础、高级特性与性能调优](https://www.jianshu.com/p/2f14bc570563)
-
 ### redis和memcache的区别
 
 |对比项|redis|memcache|

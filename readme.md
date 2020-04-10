@@ -1,46 +1,9 @@
-# PHP面试问答
 
-结合实际PHP面试，汇总自己遇到的问题，以及网上其他人遇到的问题，尝试提供简洁准确的答案
-
-包含网络、数据结构与算法、PHP、Web、MySQL、Redis、Linux、安全、设计模式、架构、面试等部分
-
-> 本仓库将持续更新，fork 无法看到最新内容，建议 Watch 或 Star ~~
-
-**温馨提示**
-
-- 本仓库需要什么内容：`实际经典面试题` + `靠谱简答` + `详细深入文章(必要的话)`
-
-## 面试流程
-
-![面试流程](./docs/assets/interview.png)
-
-
-## 问题列表
+## 目录列表
 
 ### 网络篇
 
-- [计算机网络体系结构](./docs/01.网络.md#1-计算机网络体系结构)
-- [UDP 的主要特点](./docs/01.网络.md#2-udp-的主要特点)
-- [TCP 的主要特点](./docs/01.网络.md#3-tcp-的主要特点)
-- [简述三报文握手建立 TCP 连接](./docs/01.网络.md#4-简述三报文握手建立-tcp-连接)
-- [建立 TCP 连接为什么最后还要发送确认](./docs/01.网络.md#5-建立-tcp-连接为什么最后还要发送确认)
-- [简述 TCP 连接的释放](./docs/01.网络.md#6-简述-tcp-连接的释放)
-- [TIME-WAIT 是什么，为什么必须等待 2MLS](./docs/01.网络.md#7-time-wait-是什么为什么必须等待-2mls)
-- [TCP 粘包问题](./docs/01.网络.md#8-tcp-粘包问题)
-- [UDP、TCP 区别，适用场景](./docs/01.网络.md#9-udptcp-区别适用场景)
-- [建立 socket 需要哪些步骤](./docs/01.网络.md#10-建立-socket-需要哪些步骤)
-- [DNS 主要作用是什么](./docs/01.网络.md#11-dns-主要作用是什么)
-- [HTTP 报文组成](./docs/01.网络.md#12-http-报文组成)
-- [HTTP 状态码](./docs/01.网络.md#13-http-状态码)
-- [常见的 HTTP 方法](./docs/01.网络.md#14-常见的-http-方法)
-- [GET 与 POST 请求方式区别](./docs/01.网络.md#15-get-与-post-请求方式区别)
-- [HTTP 优缺点](./docs/01.网络.md#16-http-优缺点)
-- [HTTPS 通信原理](./docs/01.网络.md#17-https-通信原理)
-- [HTTP 2.0](./docs/01.网络.md#18-http-20)
-- [WebSocket](./docs/01.网络.md#19-websocket)
-- [IPv6 与 IPv4 有什么变化](./docs/01.网络.md#20-ipv6-与-ipv4-有什么变化)
-- [什么是心跳机制](./docs/01.网络.md#21-什么是心跳机制)
-- [什么是长连接](./docs/01.网络.md#22-什么是长连接)
+- [计算机网络](./docs/01.网络.md)
 
 ### 数据结构与算法篇
 
@@ -55,39 +18,12 @@
 - [经典算法题](./docs/02.数据结构与算法.md#9-经典算法题)
 
 ### 算法
-- 冒泡排序
+- [算法](./docs/算法/算法.md)
 
 ### PHP 篇
 
-- [echo、print、print_r、var_dump 区别](./docs/03.PHP/QA.md#echoprintprint_rvar_dump-区别)
-- [单引号和双引号的区别](./docs/03.PHP/QA.md#单引号和双引号的区别)
-- [isset 和 empty 的区别](./docs/03.PHP/QA.md#isset-和-empty-的区别)
-- [static、self、$this 的区别](./docs/03.PHP/QA.md#staticselfthis-的区别)
-- [include、require、include_once、require_once 的区别](./docs/03.PHP/QA.md#includerequireinclude_oncerequire_once-的区别)
-- [数组处理函数](./docs/03.PHP/QA.md#常见数组函数)
-- [Cookie 和 Session](./docs/03.PHP/QA.md#cookie-和-session)
-- [预定义变量](./docs/03.PHP/QA.md#预定义变量)
-- [传值和传引用的区别](./docs/03.PHP/QA.md#传值和传引用的区别)
-- [构造函数和析构函数](./docs/03.PHP/QA.md#构造函数和析构函数)
-- [魔术方法](./docs/03.PHP/QA.md#魔术方法)
-- [public、protected、private、final 区别](./docs/03.PHP/QA.md#publicprotectedprivatefinal-区别)
-- [客户端/服务端 IP 获取，了解代理透传 实际IP 的概念](./docs/03.PHP/QA.md#客户端服务端-ip-获取了解代理透传-实际ip-的概念)
-- [类的静态调用和实例化调用](./docs/03.PHP/QA.md#类的静态调用和实例化调用)
-- [PHP 不实例化调用方法](./docs/03.PHP/QA.md#php-不实例化调用方法)
-- [php.ini 配置选项](./docs/03.PHP/QA.md#phpini-配置选项)
-- [php-fpm.conf 配置](./docs/03.PHP/QA.md#php-fpmconf-配置)
-- [502、504 错误产生原因及解决方式](./docs/03.PHP/QA.md#502504-错误产生原因及解决方式)
-- [如何返回一个301重定向](./docs/03.PHP/QA.md#如何返回一个301重定向)
-- [PHP 与 MySQL 连接方式](./docs/03.PHP/QA.md#php-与-mysql-连接方式)
-- [MySQL、MySQLi、PDO 区别](./docs/03.PHP/QA.md#mysqlmysqlipdo-区别)
-- [MySQL 连接池](./docs/03.PHP/QA.md#mysql-连接池)
-- [代码执行过程](./docs/03.PHP/QA.md#代码执行过程)
-- [base64 编码原理](./docs/03.PHP/QA.md#base64-编码原理)
-- [ip2long 实现](./docs/03.PHP/QA.md#ip2long-实现)
-- [MVC 的理解](./docs/03.PHP/QA.md#mvc-的理解)
-- [主流 PHP 框架特点](./docs/03.PHP/QA.md#主流-php-框架特点)
-- [对象关系映射/ORM](./docs/03.PHP/QA.md#对象关系映射orm)
-- [了解大部分数组处理函数](./docs/03.PHP/QA.md#数组处理函数)
+- [php基础](./docs/03.PHP/QA.md)
+- [php进阶](./docs/03.PHP/php进阶.md)
 ### Web 篇
 
 - [SEO 有哪些需要注意的](./docs/04.Web/QA.md#seo-有哪些需要注意的)
@@ -130,40 +66,25 @@
 
 ### MySQL 篇
 
-- [体系结构](./docs/05.MySQL/QA.md#体系结构)
-- [基础操作](./docs/05.MySQL/QA.md#基础操作)
-- [数据库设计范式](./docs/05.MySQL/QA.md#数据库设计范式)
-- [数据库设计原则](./docs/05.MySQL/QA.md#数据库设计原则)
-- [CHAR 和 VARCHAR 数据类型区别](./docs/05.MySQL/QA.md#char-和-varchar-数据类型区别)
-- [LEFT JOIN 、RIGHT JOIN、INNER JOIN](./docs/05.MySQL/QA.md#left-join-right-joininner-join)
-- [UNION、UNION ALL](./docs/05.MySQL/QA.md#unionunion-all)
-- [常用 MySQL 函数](./docs/05.MySQL/QA.md#常用-mysql-函数)
-- [锁](./docs/05.MySQL/QA.md#锁)
-- [事务](./docs/05.MySQL/QA.md#事务)
-- [常见存储引擎](./docs/05.MySQL/QA.md#常见存储引擎)
-- [常见索引](./docs/05.MySQL/QA.md#常见索引)
-- [聚族索引与非聚族索引的区别](./docs/05.MySQL/QA.md#聚族索引与非聚族索引的区别)
-- [BTree 与 BTree-/BTree+ 索引原理](./docs/05.MySQL/QA.md#btree-与-btree-btree-索引原理)
-- [分表数量级](./docs/05.MySQL/QA.md#分表数量级)
-- [EXPLAIN 输出格式](./docs/05.MySQL/QA.md#explain-输出格式)
-- my.cnf 配置
-- 慢查询
+- [mysql整理](./docs/05.MySQL/mysql.md)
+- [mysql基础](./docs/05.MySQL/QA.md)
+
 
 ### Redis 篇
 
-- [Redis 介绍](./docs/06.Redis/QA.md#redis-介绍)
-- [Redis 特点](./docs/06.Redis/QA.md#redis-特点)
-- [Redis 支持哪些数据结构](./docs/06.Redis/QA.md#redis-支持哪些数据结构)
-- [Redis 与 Memcache 区别](./docs/06.Redis/QA.md#redis-与-memcache-区别)
-- [发布订阅](./docs/06.Redis/QA.md#发布订阅)
-- [持久化策略](./docs/06.Redis/QA.md#持久化策略)
-- [Redis 事务](./docs/06.Redis/QA.md#redis-事务)
-- [如何实现分布式锁](./docs/06.Redis/QA.md#如何实现分布式锁)
-- [Redis 过期策略及内存淘汰机制](./docs/06.Redis/QA.md#redis-过期策略及内存淘汰机制)
-- [为什么 Redis 是单线程的](./docs/06.Redis/QA.md#为什么-redis-是单线程的)
-- [如何利用 CPU 多核心](./docs/06.Redis/QA.md#如何利用-cpu-多核心)
-- [集合命令的实现方法](./docs/06.Redis/QA.md#集合命令的实现方法)
-- [有序集合命令的实现方法](./docs/06.Redis/QA.md#有序集合命令的实现方法)
+- [Redis 介绍](docs/Nosql/06.Redis/QA.md#redis-介绍)
+- [Redis 特点](docs/Nosql/06.Redis/QA.md#redis-特点)
+- [Redis 支持哪些数据结构](docs/Nosql/06.Redis/QA.md#redis-支持哪些数据结构)
+- [Redis 与 Memcache 区别](docs/Nosql/06.Redis/QA.md#redis-与-memcache-区别)
+- [发布订阅](docs/Nosql/06.Redis/QA.md#发布订阅)
+- [持久化策略](docs/Nosql/06.Redis/QA.md#持久化策略)
+- [Redis 事务](docs/Nosql/06.Redis/QA.md#redis-事务)
+- [如何实现分布式锁](docs/Nosql/06.Redis/QA.md#如何实现分布式锁)
+- [Redis 过期策略及内存淘汰机制](docs/Nosql/06.Redis/QA.md#redis-过期策略及内存淘汰机制)
+- [为什么 Redis 是单线程的](docs/Nosql/06.Redis/QA.md#为什么-redis-是单线程的)
+- [如何利用 CPU 多核心](docs/Nosql/06.Redis/QA.md#如何利用-cpu-多核心)
+- [集合命令的实现方法](docs/Nosql/06.Redis/QA.md#集合命令的实现方法)
+- [有序集合命令的实现方法](docs/Nosql/06.Redis/QA.md#有序集合命令的实现方法)
 - redis.conf 配置
 - 慢查询
 
@@ -240,29 +161,3 @@
 - [get和post的区别](./docs/14.对比篇/get和post的区别.md)
 - [redis和memcache区别](./docs/14.对比篇/redis和memcache区别.md)
 - [http和https区别](./docs/14.对比篇/QA.md#HTTP与HTTPS区别)
-
-## 为何要写这个
-
-从事软件开发，已经接近五个年头了，去年面试中，发现自己依然处于尴尬的位置。简单重复，缺乏挑战的工作，已经没有多大吸引力了，优秀的平台，面试缺屡次碰壁。人上年纪之后，思维敏感度、记忆力都明显有所下滑。
-
-程序开发不要被限制在语言层面，这是大家都懂的道理。但是作为一个 PHP 开发者，很多时候都是缠绕在业务的沟壑，理想和现实总是相差甚大。去年由于部门重组，本来将近十余人负责的项目，之后只剩两三人负责，各种坑只能靠人肉解决，深感无力。
-
-工作可能只是你的一部分，你必须有自己的能力定位。以前总觉得学什么，做什么都无所谓，需要学习的技术，花点时间快速学习就行，有新的技术出来，赶紧紧跟了解下。但这些年下来，发现自己却没有一样能够拿的出手的，甚至连一个像样的作品也没有。其实 PHP 的技术栈还是比较广的，在对整个技术栈有一定的掌握之后，可能还需要深挖几个自己喜欢的领域，否则在现今的就业市场里面，没有任何的竞争力。所以可以看到很多招聘者都在感慨，中高级工程师都去哪里了。
-
-面试或者面试他人，无法逃避，那就选择面对。撰写《PHP 面试问答》，构建一个面试体系，而不必慌张的临时准备，时时刻刻都充分准备好，对自己负责，也对别人负责。
-
-结合实际 PHP 面试，系统的汇总面试中的各种各样的问题，尝试提供简洁准确的答案。如果你在 PHP 面试中遇到问题，欢迎提 Issues 交流。包含网络、数据结构与算法、PHP、Web、MySQL、Redis、Linux、安全、设计模式、架构、自我介绍、离职原因、职业规划、准备问题等部分。
-
-最后，祝愿大家在日后的求职中，都能拿到满意的 offer~~
-
-## 参考
-
-[术语对照表](./docs/术语对照表.md)：顾名思义，帮助联想知识点
-
-[参考资料](./docs/参考资料.md)：站在巨人的肩膀上，你将能看的更远
-
-## 声明
-
-本资料仅供参考，水平有限，难免存在纰漏错误之处
-
-欢迎转载，转载请标明来源出处，谢谢~~
