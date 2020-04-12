@@ -136,6 +136,8 @@ include_once 语句在脚本执行期间包含并运行指定文件。此行为�
 
 ### 数组处理函数
 
+更多数组函数 [《更多数组函数》](https://www.php.net/manual/zh/book.array.php)
+
 array_count_values — 统计数组中所有的值
 
 array_flip — 交换数组中的键和值
@@ -160,11 +162,12 @@ count — 计算数组中的单元数目，或对象中的属性个数
 
 sort — 对数组排序
 
-更多数组函数 [《更多数组函数》](https://www.php.net/manual/zh/book.array.php)
 
 ### 字符串处理函数
-chunk_split — 将字符串分割成小块
+
 更多字符串函数 [《字符串函数》](https://www.php.net/manual/zh/ref.strings.php)
+
+chunk_split — 将字符串分割成小块
 
 ### Cookie 和 Session
 
@@ -183,8 +186,6 @@ Session：会话机制(Session)在 PHP 中用于保持用户连续访问Web应�
 （3）内容区别：cookie保存的内容是字符串，而服务器中的session保存的数据是对象。
 
 （4）路径区别：session不能区分路径，同一个用户在访问一个网站期间，所有的session在任何一个地方都可以访问到；而cookie中如果设置了路径参数，那么同一个网站中不同路径下的cookie互相是访问不到的。
-
-### 抽象类与接口有什么区别与联系
 
 #### 抽象类
 
@@ -248,6 +249,9 @@ Good morning James
 虽然 PHP 不支持多重继承，但是一个类可以实现多个接口，用逗号来分隔多个接口的名称。
 
 #### 接口和抽象类主要有以下区别：
+
+[抽象类和接口的区别，使用场景](https://blog.csdn.net/sinat_36187124/article/details/78684406)
+
 抽象类：PHP5 支持抽象类和抽象方法。被定义为抽象的类不能被实例化。任何一个类，
 如果它里面至少有一个方法是被声明为抽象的，那么这个类就必须被声明为抽象的。被定义
 为抽象的方法只是声明了其调用方法和参数，不能定义其具体的功能实现。抽象类通过关键
@@ -270,19 +274,21 @@ Good morning James
 
 5）一个类可以同时实现多个接口，但是只能实现一个抽象类。
 
-### final 有什么作用
+### final有什么作用
+
+[官方解释](https://www.php.net/manual/zh/language.oop5.final.php)
 
 final 可以用来修饰类和方法，当修饰类的时候，该类不能被继承，当修饰方法的时候，该方法不能被覆盖。
 
 具体而言，final 具有以下特性：
 
-final 用于声明方法和类，分别表示方法不可被覆盖、类不可被继承（不能再派生出新的子类）。
+final用于声明方法和类，分别表示方法不可被覆盖、类不可被继承（不能再派生出新的子类）。
 
-final 方法：当一个方法被声明为 final 时，不允许任何子类重写这个方法，但子类仍然可
+final方法：当一个方法被声明为final 时，不允许任何子类重写这个方法，但子类仍然可
 以使用这个方法。需要注意的是，final不能修饰类的成员变量。
 
-final 类：当一个类被声明为 final时，此类不能被继承，所有方法都不能被重写。值得注
-意的是，一个类不能既被声明为 abstract，又被声明为 final。
+final类：当一个类被声明为final时，此类不能被继承，所有方法都不能被重写。值得注
+意的是，一个类不能既被声明为 abstract，又被声明为final。
 
 ### 预定义变量
 
@@ -319,15 +325,19 @@ PHP 中的许多预定义变量都是“超全局的”，这意味着它们在�
 
 ### 构造函数和析构函数
 
+[官方解释](https://www.php.net/manual/zh/language.oop5.decon.php)
+
 构造函数：PHP 5 允行开发者在一个类中定义一个方法作为构造函数。具有构造函数的类会在每次创建新对象时先调用此方法，所以非常适合在使用对象之前做一些初始化工作
 
 析构函数：PHP 5 引入了析构函数的概念，这类似于其它面向对象的语言，如 C++。析构函数会在到某个对象的所有引用都被删除或者当对象被显式销毁时执行
 
 ### 魔术方法
 
+[魔术方法](https://www.php.net/manual/zh/language.oop5.magic.php)
+
 \_\_construct()， \_\_destruct()， \_\_call()， \_\_callStatic()， \_\_get()， \_\_set()， \_\_isset()， \_\_unset()， \_\_sleep()， \_\_wakeup()， \_\_toString()， \_\_invoke() 等方法在 PHP 中被称为"魔术方法"（Magic methods）
 
-### public、protected、private、final 区别
+### public、protected、private、final区别
 
 对属性或方法的访问控制，是通过在前面添加关键字 public（公有），protected（受保护）或 private（私有）来实现的。被定义为公有的类成员可以在任何地方被访问
 
@@ -343,6 +353,7 @@ PHP 5 新增了一个 final 关键字。如果父类中的方法被声明为 fin
 
 ### PHP_$_SERVER_说明详解
 
+[$_SERVER详解](https://www.php.net/manual/zh/reserved.variables.server.php)
 
 $_SERVER['PHP_SELF'] #当前正在执行 脚本的文件名，与 document root相关。
 
@@ -429,7 +440,7 @@ $_SERVER['REQUEST_URI'] #访问此页面所需的 URI。例如，“/index.html�
 - 配置选项
 
 |名字|默认|备注|
-|-|-|-|
+|---|---|---|
 |short_open_tag|"1"|是否开启缩写形式(`<? ?>`)|
 |precision|"14"|浮点数中显示有效数字的位数|
 |disable_functions|""|禁止某些函数|
@@ -457,20 +468,6 @@ ini_set('date.timezone', 'Asia/Shanghai'); //设置时区
 ini_set('display_errors', '1'); //设置显示错误
 ini_set('memory_limit', '256M'); //设置最大内存限制
 ```
-
-### php-fpm.conf 配置
-
-|名称|默认|备注|
-|-|-|-|
-|pid||PID文件的位置|
-|error_log||错误日志的位置|
-|log_level|notice|错误级别 alert:必须立即处理、error:错误情况、warning:警告情况、notice:一般重要信息、debug:调试信息|
-|daemonize|yes|设置 FPM 在后台运行|
-|listen|ip:port、port、/path/to/unix/socket|设置接受 FastCGI 请求的地址|
-|pm|static、ondemand、dynamic|设置进程管理器如何管理子进程|
-|request_slowlog_timeout|'0'|慢日志记录阀值|
-|slowlog||慢请求的记录日志|
-
 ### 502、504 错误产生原因及解决方式
 
 #### 502
@@ -604,12 +601,6 @@ $pdo = null;
 
 对于一个多进程的服务器，其典型特征是有一个父进程和一组子进程协调运行，其中实际生成 web 页面的是子进程。每当客户端向父进程提出请求时，该请求会被传递给还没有被其它的客户端请求占用的子进程。这也就是说当相同的客户端第二次向服务端提出请求时，它将有可能被一个不同的子进程来处理。在开启了一个持久连接后，所有请求 SQL 服务的后继页面都能够重用这个已经建立的 SQL Server 连接。
 
-### 代码执行过程
-
-PHP 代码 => 启动 php 及 zend 引擎，加载注册拓展模块 => 对代码进行词法/语法分析 => 编译成opcode(opcache) => 执行 opcode
-
-> PHP7 新增了抽象语法树(AST)，在语法分析阶段生成 AST，然后再生成 opcode 数组
-
 ### base64 编码原理
 
 ![base64](./assets/php-base64.png)
@@ -617,7 +608,6 @@ PHP 代码 => 启动 php 及 zend 引擎，加载注册拓展模块 => 对代码
 ### ip2long 实现
 
 ![ip2long](./assets/php-ip2long.png)
-
 
 ```
 124.205.30.150=2093817494
@@ -627,11 +617,11 @@ list($p1,$p2,$p3,$p4) = explode(',','124.205.30.150');
 $realNum = $p1<<24+$p2<<16+$p3<<8+$p4;
 ```
 
-### MVC 的理解
+### MVC的理解
 
 MVC 包括三类对象。模型 Model 是应用对象，视图 View 是它在屏幕上的表示，控制器 Controller 定义用户界面对用户输入的响应方式。不使用 MVC，用户界面设计往往将这些对象混在一起，而 MVC 则将它们分离以提高灵活性和复用性
 
-### 主流 PHP 框架特点
+### 主流PHP框架特点
 
 #### Laravel
 
@@ -723,14 +713,6 @@ if (!$fp) {
 }
 ```
 
-### 多进程同时写一个文件
-
-加锁、队列
-
-### PHP 进程模型，进程通讯方式，进程线程区别
-
-消息队列、socket、信号量、共享内存、信号、管道
-
 ### PHP 支持回调的函数，实现一个
 
 array_map、array_filter、array_walk、usort
@@ -767,18 +749,19 @@ $ phpize $ ./configure $ make && make install
 
 ### 如何获取扩展安装路径
 
+1、phpinfo() => extensions
+
+2、php -i|grep extensions
+
 ### 垃圾回收机制
 
 引用计数器
 
-### yield 是什么，说个使用场景 yield、yield 核心原理是什么
+### yield是什么，说个使用场景 yield、yield 核心原理是什么
 
 一个生成器函数看起来像一个普通的函数，不同的是普通函数返回一个值，而一个生成器可以yield生成许多它所需要的值
 
 拓展阅读 [《yield 核心原理》](./04.yield.md)
-
-### 抽象类和接口的区别，使用场景
-拓展阅读 [《抽象类和接口的区别，使用场景》](./05.抽象类和接口的区别，使用场景.md)
 
 ### traits 与 interfaces 区别 及 traits 解决了什么痛点
 拓展阅读 [《traits 与 interfaces》](06.traits与interfaces的区别及traits解决了什么痛点.md)
@@ -793,33 +776,25 @@ $ phpize $ ./configure $ make && make install
 
 ### Copy on write 原理，何时 GC
 
-### 如何解决 PHP 内存溢出问题
-
-### ZVAL
-
-### HashTable
-
-### PHP7 新特性
-扩展阅读[《php7 新特性》](./07.php7&新特性.md)
-
-标量类型声明、返回值类型声明、通过 define() 定义常量数组、匿名类、相同命名空间类一次性导入
-
-### PHP7 底层优化
-
-ZVAL 结构体优化，占用由24字节降低为16字节
-
-内部类型 zend_string，结构体成员变量采用 char 数组，不是用 char*
-
-PHP 数组实现由 hashtable 变为 zend array
-
-函数调用机制，改进函数调用机制，通过优化参数传递环节，减少了一些指令
-
-### PSR 介绍，PSR-1, 2, 4, 7
-
-### Xhprof 、Xdebug 性能调试工具使用
 
 ### 字符串、数字比较大小的原理，注意 0 开头的8进制、0x 开头16进制
 
-### BOM 头是什么，怎么除去
+### BOM头是什么，怎么除去
+
+#### bom头
+
+BOM头是放在UTF-8编码的文件的头部的，占用三个字节，用来标识该文件属于UTF-8编码
+
+#### 去除bom头
+
+```
+$result = trim($result, "\xEF\xBB\xBF");
+print_r(json_decode($result, true));
+exit;
+```
 
 ### 模板引擎是什么，解决什么问题、实现原理（Smarty、Twig、Blade）
+
+#### 模板引擎是什么
+
+模板引擎（这里特指用于Web开发的模板引擎）是为了使用户界面与业务数据（内容）分离而产生的，它可以生成特定格式的文档，用于网站的模板引擎就会生成一个标准的HTML文档。
