@@ -4,6 +4,7 @@
 ## 目录
 
 - [关系型数据库](#关系型数据库)
+
 - [mysql教程](https://www.w3cschool.cn/mysql/)
 
 - [mysql技术文章](#mysql技术文章)
@@ -11,6 +12,8 @@
 - [SQL语句执行过程详解](#SQL语句执行过程详解)
 
 - [设计范式](#设计范式)
+
+- [数据库设计原则](#数据库设计原则)
 
 - [索引](#索引)
   - [mysql索引](#mysql索引)
@@ -25,11 +28,11 @@
   - [mysql主键和唯一索引的区别](#mysql主键和唯一索引的区别)
   - [聚集索引和非聚集索引](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961494&idx=1&sn=34f1874c1e36c2bc8ab9f74af6546ec5&chksm=bd2d0d4a8a5a845c566006efce0831e610604a43279aab03e0a6dde9422b63944e908fcc6c05&scene=21#wechat_redirect)
   
-- [Explain分析sql](#explain分析sql)
+- [explain分析sql](#explain分析sql)
   
 - 锁
-   - 锁详解
-   - 乐观锁/悲观锁
+   - [锁详解](#锁详解)
+   - [乐观锁/悲观锁](#mysql乐观锁和悲观锁)
    - [mysql的并发控制与加锁分析](#mysql的并发控制与加锁分析)
 
 - [事务](#事务)
@@ -52,6 +55,8 @@
   - [Innodb架构介绍之磁盘篇](https://zhuanlan.zhihu.com/p/95165042)
   
 - [mysql优化](#mysql优化)
+   - [mysql优化](#mysql优化)
+   - [我必须得告诉大家的mysql优化原理](#我必须得告诉大家的mysql优化原理)
    - [阿里云面试官：如果是mysql引起的CPU消耗过大，你会如何优化？]
 
 - mysql复制
@@ -84,17 +89,33 @@
 
 [SQL语句执行过程详解](https://www.jianshu.com/p/56fe9bf91448)
 
+1、客户端发送一条查询给服务器。
+
+2、服务器先检查查询缓存，如果命中了缓存，则立刻返回存储在缓存中的结果。否则进入下一阶段。
+
+3、服务器端进行SQL解析、预处理，再由优化器生成对应的执行计划。
+
+4、MySQL根据优化器生成的执行计划，再调用存储引擎的API来执行查询。
+
+5、将结果返回给客户端。
+
 ### 设计范式
 
 - 第一范式(1NF)：要求数据库表的每一列都是不可分割的基本数据项，同一列中不能有多个值
 - 第二范式(2NF)：唯一性约束，每条记录有唯一标示，所有的非主键字段均需依赖于主键字段
 - 第三范式(3NF)：冗余性约束，非主键字段间不能相互依赖
 
+### 数据库设计原则
+
+- 避免冗余属性，冗余属性会带来数据不一致性
+- 一个表只存储它应该存储的信息，和此表无关的信息放到另一个表去存储，表之间尽量解耦
+- 一个字段中不要出现分隔符，或者在一个字段中存储多个信息
+
 ## 索引
 
 ### mysql索引
 
-参考文章 [mysql索引](https://www.cnblogs.com/Aiapple/p/5693239.html)
+ [mysql索引](https://www.cnblogs.com/Aiapple/p/5693239.html)
 
 ### mysql为什么用b+树做索引
 [《原文-mysql为什么用b+树做索引》](https://www.cnblogs.com/xufengnian/p/11885724.html#_label2)
@@ -220,7 +241,9 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
 
 # explain分析sql
 
-参考文章 [《explain分析sql》](https://www.cnblogs.com/songwenjie/p/9409852.html)
+ [《explain分析sql》](https://www.cnblogs.com/songwenjie/p/9409852.html)
+ 
+ [《explain分析sql》](https://segmentfault.com/a/1190000008131735)
 
 ![explain](./assets/explain.jpg)
 
@@ -232,9 +255,32 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
 
 ### 锁
 
+#### 锁详解
+[mysql锁详解](https://www.cnblogs.com/leedaily/p/8378779.html)
+
+#### mysql乐观锁和悲观锁
+[mysql乐观锁和悲观锁](https://www.jianshu.com/p/f5ff017db62a)
+
+##### 乐观锁
+
+乐观锁（Optimistic Lock），顾名思义，就是很乐观，每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在提交更新的时候会判断一下在此期间别人有没有去更新这个数据。乐观锁适用于读多写少的应用场景，这样可以提高吞吐量。
+
+乐观锁：假设不会发生并发冲突，只在提交操作时检查是否违反数据完整性。
+
+乐观锁一般来说有以下2种方式：
+
+使用数据版本（Version）记录机制实现，这是乐观锁最常用的一种实现方式。何谓数据版本？即为数据增加一个版本标识，一般是通过为数据库表增加一个数字类型的 “version” 字段来实现。当读取数据时，将version字段的值一同读出，数据每更新一次，对此version值加一。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的version值进行比对，如果数据库表当前版本号与第一次取出来的version值相等，则予以更新，否则认为是过期数据。
+使用时间戳（timestamp）。乐观锁定的第二种实现方式和第一种差不多，同样是在需要乐观锁控制的table中增加一个字段，名称无所谓，字段类型使用时间戳（timestamp）, 和上面的version类似，也是在更新提交的时候检查当前数据库中数据的时间戳和自己更新前取到的时间戳进行对比，如果一致则OK，否则就是版本冲突。
+
+##### 悲观锁
+
+悲观锁（Pessimistic Lock），顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会block直到它拿到锁。
+
+悲观锁：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。
+
 #### mysql的并发控制与加锁分析
 
-参考文章 [《mysql的并发控制与加锁分析》](https://www.cnblogs.com/yelbosh/p/5813865.html)
+[《mysql的并发控制与加锁分析》](https://www.cnblogs.com/yelbosh/p/5813865.html)
 
 ### 事务
 
@@ -246,7 +292,7 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
 [事务隔离级别](https://www.cnblogs.com/Aiapple/p/5686554.html)
 
 #### 分布式事务
-- 参考文章:
+- :
     - [深入理解分布式事务,高并发下分布式事务的解决方案](https://blog.csdn.net/mine_song/article/details/64118963)
     - [理解分布式系统—从ACID到BASE](https://blog.csdn.net/lemon89/article/details/53750464)
     
@@ -254,11 +300,11 @@ B树在提高了IO性能的同时并没有解决元素遍历的我效率低下�
 
 #### 存储引擎概述
 
-参考文章 [《存储引擎概述》](https://www.cnblogs.com/Aiapple/p/5687561.html)
+ [《存储引擎概述》](https://www.cnblogs.com/luyucheng/p/6306512.html)
 
 #### innodb存储引擎
 
-参考文章 [《innodb存储引擎》](https://www.cnblogs.com/Aiapple/p/5689634.html)
+ [《innodb存储引擎》](https://www.cnblogs.com/Aiapple/p/5689634.html)
 
 #### myisam与innodb区别
 
@@ -315,7 +361,7 @@ MYISAM和INNODB是mysql数据库提供的两种存储引擎。两者的优劣可
 #### innodb为什么推荐使用自增ID作为主键
 自增ID可以保证每次插入时B+索引是从右边扩展的，可以避免B+树频繁合并和分裂（对比使用UUID）。如果使用字符串主键和随机主键，会使得数据随机插入，效率比较差
 
-参考文章 [InnoDB表为什么要建议用自增列做主键](https://blog.csdn.net/wukong_666/article/details/54982712)
+ [InnoDB表为什么要建议用自增列做主键](https://blog.csdn.net/wukong_666/article/details/54982712)
 
 #### innodb引擎的4大特性
 - 插入缓冲（insert buffer)
@@ -324,34 +370,36 @@ MYISAM和INNODB是mysql数据库提供的两种存储引擎。两者的优劣可
 - 预读(read ahead)
 
 详细解释 [《innodb引擎的4大特性》](https://www.cnblogs.com/zhs0/p/10528520.html)
-
-
     
 ### mysql优化
-参考文章 [《我必须得告诉大家的mysql优化原理》](https://www.jianshu.com/p/d7665192aaaf)
 
-参考文章 [《我必须得告诉大家的mysql优化原理2》](https://www.jianshu.com/p/01b9f028d9c7)
+#### mysql优化
 
-参考文章 [《mysql优化》](https://www.cnblogs.com/Aiapple/p/5697229.html)
+[mysql优化](https://www.cnblogs.com/luyucheng/p/6323477.html)
+
+#### 我必须得告诉大家的mysql优化原理
+[《我必须得告诉大家的mysql优化原理》](https://www.jianshu.com/p/d7665192aaaf)
+
+[《我必须得告诉大家的mysql优化原理2》](https://www.jianshu.com/p/01b9f028d9c7)
 
 
 #### 阿里云面试官：如果是mysql引起的CPU消耗过大，你会如何优化？
 
-参考文章 [《如果是mysql引起的CPU消耗过大，你会如何优化》](https://zhuanlan.zhihu.com/p/114561762)
+[《如果是mysql引起的CPU消耗过大，你会如何优化》](https://zhuanlan.zhihu.com/p/114561762)
 
 ### mysql复制
 
 #### mysql主从复制原理
 
-参考文章 [《mysql复制原理》](https://baijiahao.baidu.com/s?id=1617888740370098866&wfr=spider&for=pc)
+[《mysql复制原理》](https://baijiahao.baidu.com/s?id=1617888740370098866&wfr=spider&for=pc)
 
-参考文章 [《mysql复制原理》](https://www.cnblogs.com/Aiapple/p/5792939.html?spm=a2c4e.10696291.0.0.48ef19a41AArtz)
+[《mysql复制原理》](https://www.cnblogs.com/Aiapple/p/5792939.html?spm=a2c4e.10696291.0.0.48ef19a41AArtz)
 
-参考文章 [《mysql主从复制实践》](https://www.cnblogs.com/Aiapple/p/5793786.html)
+[《mysql主从复制实践》](https://www.cnblogs.com/Aiapple/p/5793786.html)
 
 #### mysql主从同步延迟分析及解决方案
 
-参考文章 [<谈谈mysql主从同步延迟分析及解决方案>](https://www.cnblogs.com/phpper/p/8904169.html)
+[<谈谈mysql主从同步延迟分析及解决方案>](https://www.cnblogs.com/phpper/p/8904169.html)
 
 
 ### mysql面试题集锦
@@ -386,4 +434,4 @@ B+树是在B树的基础上进行改造，它的数据都在叶子结点，同�
 
 #### mysql学习笔记：count(1)、count(*)、count（字段）的区别
 
-参考文章 [《count(1)、count(*)、count（字段）的区别》](https://www.cnblogs.com/hider/p/11726690.html)
+[《count(1)、count(*)、count（字段）的区别》](https://www.cnblogs.com/hider/p/11726690.html)
